@@ -11,9 +11,13 @@ git clone https://github.com/nariaki3551/master_mind_cpp.git
 
 ## Build
 
+### CMAKE
+
 ```bash
-$ g++ main.cpp -std=c++17
+mkdir build
+cd build
+cmake ..
+make
 ```
-
-
+The binary will be created as `build/src/mastermind`.
 
