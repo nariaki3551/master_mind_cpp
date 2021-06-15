@@ -20,7 +20,7 @@ typedef std::deque<Code>      CodeList;
 * @param[in] guess コード
 * @return (hit, blow)
 */
-HitBlow countHitBlow(
+auto countHitBlow(
       Code &code,
       Code &guess
       )
@@ -54,7 +54,7 @@ HitBlow countHitBlow(
 * @param[in, out] S 秘密コードの候補集合
 * @param[in] 推論コード
 */
-void trial(
+auto trial(
       CodeList &S,
       Code &guess
       )
@@ -68,7 +68,7 @@ void trial(
 
    // 選別
    CodeList newS;
-   for ( Code code : S )
+   for ( auto code : S )
    {
       if( countHitBlow(code, guess) == InputHitBlow )
       {
@@ -85,9 +85,9 @@ void trial(
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in] S 秘密コードの候補集合
 * @param[in] G 推論コードの候補集合
-* @return Code 推論コード
+* @return 推論コード
 */
-Code policy(
+auto policy(
       CodeList &S,
       CodeList &G
       )
@@ -95,7 +95,7 @@ Code policy(
    // random sampling from G
    std::mt19937 engine(0);
    std::uniform_int_distribution<> sampler(0, G.size()-1);
-   Code guess = G[sampler(engine)];
+   auto guess = G[sampler(engine)];
    return guess;
 }
 
@@ -108,12 +108,12 @@ int main()
    // main
    while( S.size() > 1 )
    {
-      Code guess = policy(S, S); // G <- S
+      auto guess = policy(S, S); // G <- S
       trial(S, guess);           // update S
    }
 
    // post process
-   Code guess = S[0];
+   auto guess = S[0];
    std::cout << "guess is [ " << guess[0] << " " << guess[1] << " ]" << std::endl;
 
    return 0;
