@@ -106,15 +106,16 @@ int main()
    CodeList S{ Code{0,0}, Code{0,1}, Code{1,0}, Code{1,1} };
 
    // main
+   decltype(policy(S, S)) guess;
    while( S.size() > 1 )
    {
-      auto guess = policy(S, S); // G <- S
-      trial(S, guess);           // update S
+      guess = policy(S, S);   // G <- S
+      trial(S, guess);        // update S
    }
 
    // post process
-   auto guess = S[0];
-   std::cout << "guess is [ " << guess[0] << " " << guess[1] << " ]" << std::endl;
+   auto secret = S[0];
+   std::cout << "guess is [ " << secret[0] << " " << secret[1] << " ]" << std::endl;
 
    return 0;
 }
