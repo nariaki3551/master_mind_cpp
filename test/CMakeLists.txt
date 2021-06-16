@@ -22,4 +22,5 @@ target_link_libraries(  # -lgtest -lgtest_main
   utest PRIVATE
   gtest
   gtest_main
+  pthread
   )
