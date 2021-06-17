@@ -5,22 +5,28 @@ add_executable(
 
 target_include_directories(
   utest PRIVATE
-  ${PROJECT_SOURCE_DIR}/src  # -I./src/
+  ${PROJECT_SOURCE_DIR}/src
   )
 
-target_compile_options(  # -Wall
+target_compile_options(
   utest PRIVATE
   -Wall
+  -g
   )
 
-target_compile_features(  # -std=c++17
+target_compile_features(
   utest PRIVATE
   cxx_std_17
   )
 
-target_link_libraries(  # -lgtest -lgtest_main
+target_link_libraries(
   utest PRIVATE
   gtest
   gtest_main
   pthread
   )
+
+target_link_options(
+  utest PRIVATE
+  -g
+)

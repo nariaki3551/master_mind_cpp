@@ -37,6 +37,8 @@ class Config
       int nColors;      // number of colors
       int nPins;        // number of pins
       bool duplicate;   // if it is true, then color-duplication is allowed
+      bool interactive; // if it is true, then test by user input
+      Code secret;      // for test
 
       /**
       * @brief Constructor
@@ -47,13 +49,28 @@ class Config
       Config(
             int inNColors,
             int inNPins,
-            bool inDuplicate
+            bool inDuplicate,
+            bool inInteractive=true
             )
          :
             nColors(inNColors),
             nPins(inNPins),
-            duplicate(inDuplicate)
+            duplicate(inDuplicate),
+            interactive(inInteractive)
       {}
+
+
+      /**
+       * @brief setter of secret
+       * @param[in] code コード
+       */
+      void setSecret(
+            Code code
+            )
+      {
+         secret = code;
+      }
+
 
       /**
       * @brief 管理情報をstringにする

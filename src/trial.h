@@ -8,7 +8,7 @@
 
 
 /**
-* @fn Code trial(CodeList &S, Code &guess)
+* @fn Code trial(CodeList &S, Code &guess, Config &config)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in, out] S 秘密コードの候補集合
 * @param[in] guess 推論コード
@@ -20,12 +20,26 @@ auto trial(
       Config &config
       )
 {
-   // 入力待ち
-   int hit, blow;
-   std::cout << "guess is " << strCode(guess) << std::endl;
-   std::cout << " input hit blow (e.g. 2 2): ";
-   std::cin >> hit >> blow;
-   HitBlow InputHitBlow(hit, blow);
+   // 推論コードの表示
+   if ( config.interactive )
+   {
+      std::cout << "guess is " << strCode(guess) << std::endl;
+   }
+
+   HitBlow InputHitBlow;
+   if ( config.interactive )
+   {
+      // 入力待ち
+      int hit, blow;
+      std::cout << " input hit blow (e.g. 2 2): ";
+      std::cin >> hit >> blow;
+      InputHitBlow = HitBlow(hit, blow);
+   }
+   else
+   {
+      // config.secretから正解
+      InputHitBlow = countHitBlow(config.secret, guess, config);
+   }
 
    // 選別
    CodeList newS;
