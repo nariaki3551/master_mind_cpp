@@ -85,7 +85,7 @@ public:
          CodeList &codeList
          )
    {
-      assert( r <= pool.size() );
+      assert( static_cast<decltype(pool.size())>(r) <= pool.size() );
       assert( codeList.size() == 0 );
       Code code(r);
       int n = pool.size();
