@@ -11,6 +11,11 @@ RUN apt install -y build-essential cmake vim git libpthread-stubs0-dev libgtest-
 # copy local files into image
 COPY . .
 
+# install and build third-party libraries
+RUN mkdir source -p && rm -rf source/*
+# argparse
+RUN cd source && git clone https://github.com/p-ranav/argparse.git
+
 # build
 RUN rm -rf build && mkdir build
 RUN cd build && cmake .. && make
