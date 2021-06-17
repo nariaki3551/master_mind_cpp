@@ -76,17 +76,19 @@ class Config
 * @brief コード2つから, hit, blowを計算する
 * @param[in] code コード
 * @param[in] guess コード
+* @param[in] config パラメタ
 * @return (hit, blow)
 */
 auto countHitBlow(
       Code &code,
-      Code &guess
+      Code &guess,
+      Config &config
       )
 {
-    std::vector<int> x(2, 0);
-    std::vector<int> y(2, 0);
+    std::vector<int> x(config.nColors, 0);
+    std::vector<int> y(config.nColors, 0);
     int hit = 0, blow = 0;
-    for( int i = 0; i < 2; i++ )
+    for( int i = 0; i < config.nPins; i++ )
     {
        if( code[i] == guess[i] )
        {
@@ -98,7 +100,7 @@ auto countHitBlow(
           y[guess[i]]++;
        }
     }
-    for( int i = 0; i < 2; i++ )
+    for( int i = 0; i < config.nColors; i++ )
     {
        blow += std::min(x[i], y[i]);
     }

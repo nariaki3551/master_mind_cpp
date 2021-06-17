@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "policy.h"
 #include "trial.h"
+#include "codeGenerator.h"
 
 
 int main(
@@ -42,18 +43,17 @@ int main(
    bool duplicate = !program.get<bool>("--no_duplicate");
 
    // create config object
-   Config config(nColors, nPins, duplicate);
-   exit(0);
+   Config config{nColors, nPins, duplicate};
 
-   // とりあえず(2色, 2ピン)
-   CodeList S{ Code{0,0}, Code{0,1}, Code{1,0}, Code{1,1} };
+   CodeList S;
+   allCodeGenerator(config, S);
 
    // main
    decltype(policy(S, S)) guess;
    while( S.size() > 1 )
    {
-      guess = policy(S, S);   // G <- S
-      trial(S, guess);        // update S
+      guess = policy(S, S);      // G <- S
+      trial(S, guess, config);   // update S
    }
 
    // post process

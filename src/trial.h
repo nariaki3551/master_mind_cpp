@@ -11,11 +11,13 @@
 * @fn Code trial(CodeList &S, Code &guess)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in, out] S 秘密コードの候補集合
-* @param[in] 推論コード
+* @param[in] guess 推論コード
+* @param[in] config パラメタ
 */
 auto trial(
       CodeList &S,
-      Code &guess
+      Code &guess,
+      Config &config
       )
 {
    // 入力待ち
@@ -29,7 +31,7 @@ auto trial(
    CodeList newS;
    for ( auto code : S )
    {
-      if( countHitBlow(code, guess) == InputHitBlow )
+      if( countHitBlow(code, guess, config) == InputHitBlow )
       {
          newS.push_back(code);
       }
