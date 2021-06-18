@@ -41,19 +41,19 @@ public:
     * @brief 長さrのpool要素の直積
     * @parma[in] pool 要素配列
     * @param[in] r 長さ
-    * @param[in] codeList コード保存用
+    * @param[in] codePtrList コード保存用
     * @details product({0,1}, 3) --> 000 001 010 011 100 101 110 111
     */
    void product(
          std::vector<ColorType> pool,
          int r,
-         CodeList &codeList
+         CodePtrList &codePtrList
          )
    {
-      assert( codeList.size() == 0 );
+      assert( codePtrList.size() == 0 );
       for ( auto i : pool )
       {
-         codeList.push_back(Code{i});
+         codePtrList.push_back(new Code{i});
       }
       int n = 1;
       for ( int i = 0; i < (r-1); i++ )
@@ -61,14 +61,15 @@ public:
          n *= pool.size();
          for ( int j = 0; j < n; j++ )
          {
-            auto code = codeList.front();
-            codeList.pop_front();
+            CodePtr code = codePtrList.front();
+            codePtrList.pop_front();
             for ( auto k : pool )
             {
-               auto newCode = code;
-               newCode.push_back(k);
-               codeList.push_back(newCode);
+               CodePtr newCode = new Code(*code);
+               newCode->push_back(k);
+               codePtrList.push_back(newCode);
             }
+            if( code ) delete code;
          }
       }
    }
@@ -78,23 +79,23 @@ public:
     * @brief 長さrのpool要素の順列
     * @param[in] pool 要素配列
     * @param[in] r 長さ
-    * @param[out] codeList コード保存用
+    * @param[out] codePtrList コード保存用
     * @details permutations({0,1,2,3}, 2) --> 01 02 03 12 13 23
     */
    void permutations(
          std::vector<ColorType> pool,
          int r,
-         CodeList &codeList
+         CodePtrList &codePtrList
          )
    {
       assert( static_cast<decltype(pool.size())>(r) <= pool.size() );
-      assert( codeList.size() == 0 );
+      assert( codePtrList.size() == 0 );
       Code code(r);
       int n = pool.size();
       auto indices = range(0, n);
       auto cycles = range(n, n-r, -1);
       for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
-      codeList.push_back(code);
+      codePtrList.push_back(new Code(code));
 
       bool finish = false;
       while ( !finish )
@@ -121,7 +122,7 @@ public:
                indices[i] = indices[n-j];
                indices[n-j] = tmp;
                for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
-               codeList.push_back(code);
+               codePtrList.push_back(new Code(code));
                finish = false;
                break;
             }

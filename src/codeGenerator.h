@@ -9,27 +9,26 @@
 
 
 /**
-* @fn CodeList allCodeGenerator(Config &config, CodeList &codeList)
+* @fn CodePtrList allCodeGenerator(Config &config, CodePtrList &codePtrList)
 * @brief 全てのコード配列を列挙する.
 * @param[in] config パラメタ
-* @param[out] codeList コード配列
-* @return CodeList
+* @param[out] codePtrList コード配列
 */
 void allCodeGenerator(
       Config &config,
-      CodeList &codeList
+      CodePtrList &codePtrList
       )
 {
-   assert( codeList.size() == 0 );
+   assert( codePtrList.size() == 0 );
    Itertools itertools;
    auto colors = itertools.range<ColorType>(0, config.nColors);
    if( config.duplicate )
    {
-      itertools.product(colors, config.nPins, codeList);
+      itertools.product(colors, config.nPins, codePtrList);
    }
    else
    {
-      itertools.permutations(colors, config.nPins, codeList);
+      itertools.permutations(colors, config.nPins, codePtrList);
    }
 }
 

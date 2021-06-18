@@ -8,14 +8,14 @@
 
 
 /**
-* @fn Code trial(CodeList &S, Code &guess, Config &config)
+* @fn Code trial(CodePtrList &S, Code &guess, Config &config)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in, out] S 秘密コードの候補集合
 * @param[in] guess 推論コード
 * @param[in] config パラメタ
 */
 auto trial(
-      CodeList &S,
+      CodePtrList &S,
       Code &guess,
       Config &config
       )
@@ -42,12 +42,16 @@ auto trial(
    }
 
    // 選別
-   CodeList newS;
+   CodePtrList newS;
    for ( auto code : S )
    {
-      if( countHitBlow(code, guess, config) == InputHitBlow )
+      if( countHitBlow(*code, guess, config) == InputHitBlow )
       {
          newS.push_back(code);
+      }
+      else
+      {
+         if ( code ) delete code;
       }
    }
    S = newS;

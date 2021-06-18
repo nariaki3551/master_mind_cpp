@@ -46,8 +46,8 @@ TEST ( ItertoolsTest, permutationsTest1 )
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 2;
-   CodeList codeList;
-   itertools.permutations(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.permutations(pool, r, codePtrList);
 
    CodeList ans{
       Code{0,1},
@@ -57,30 +57,40 @@ TEST ( ItertoolsTest, permutationsTest1 )
       Code{2,0},
       Code{2,1},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 TEST ( ItertoolsTest, permutationsTest2 )
 {
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 1;
-   CodeList codeList;
-   itertools.permutations(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.permutations(pool, r, codePtrList);
 
    CodeList ans{
       Code{0},
       Code{1},
       Code{2},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 TEST ( ItertoolsTest, permutationsTest3 )
 {
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 3;
-   CodeList codeList;
-   itertools.permutations(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.permutations(pool, r, codePtrList);
 
    CodeList ans{
       Code{0,1,2},
@@ -90,7 +100,12 @@ TEST ( ItertoolsTest, permutationsTest3 )
       Code{2,0,1},
       Code{2,1,0},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 /**
  * product
@@ -100,8 +115,8 @@ TEST ( ItertoolsTest, product1 )
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 2;
-   CodeList codeList;
-   itertools.product(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.product(pool, r, codePtrList);
 
    CodeList ans{
       Code{0,0},
@@ -114,30 +129,40 @@ TEST ( ItertoolsTest, product1 )
       Code{2,1},
       Code{2,2},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 TEST ( ItertoolsTest, product2 )
 {
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 1;
-   CodeList codeList;
-   itertools.product(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.product(pool, r, codePtrList);
 
    CodeList ans{
       Code{0},
       Code{1},
       Code{2},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 TEST ( ItertoolsTest, product3 )
 {
    Itertools itertools;
    std::vector<ColorType> pool{0,1,2};
    int r = 3;
-   CodeList codeList;
-   itertools.product(pool, r, codeList);
+   CodePtrList codePtrList;
+   itertools.product(pool, r, codePtrList);
 
    CodeList ans{
       Code{0,0,0}, Code{0,0,1}, Code{0,0,2},
@@ -150,7 +175,12 @@ TEST ( ItertoolsTest, product3 )
       Code{2,1,0}, Code{2,1,1}, Code{2,1,2},
       Code{2,2,0}, Code{2,2,1}, Code{2,2,2},
    };
-   ASSERT_EQ( codeList, ans );
+
+   ASSERT_EQ( codePtrList.size(), ans.size() );
+   for ( decltype(ans.size()) i = 0; i < ans.size(); i++ )
+   {
+      ASSERT_EQ( *codePtrList.at(i), ans.at(i) );
+   }
 }
 
 
