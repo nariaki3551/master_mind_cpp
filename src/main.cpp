@@ -71,7 +71,7 @@ void runInteractive(
       Config &config
       )
 {
-   CodeList S;
+   CodePtrList S;
    allCodeGenerator(config, S);
 
    // main
@@ -104,7 +104,7 @@ void runTest(
       Config &config
       )
 {
-   CodeList S;
+   CodePtrList S;
    allCodeGenerator(config, S);
 
    std::vector<int> countTable(S.size());
@@ -115,11 +115,7 @@ void runTest(
    {
       // test code
       config.setSecret(*secret);
-      CodeList testS;
-      for ( auto code : S )
-      {
-         testS.push_back(new Code(*code));
-      }
+      CodePtrList testS = copy(S);
 
       int count = 0;
 
