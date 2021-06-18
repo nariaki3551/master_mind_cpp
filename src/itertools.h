@@ -13,14 +13,16 @@ class Itertools
 public:
    /**
     * @brief beginからendまでstep幅のvecorを返す
+    * @tparam T returned value type
     * @param[in] begin
     * @param[in] end
     * @param[in] step default is 1
-    * @retrun vecor<int>
+    * @retrun vecor<T>
     * @details range(0, 5) --> {0, 1, 2, 3, 4}
     *          range(5, -1, -1) --> {5, 4, 3, 2, 1}
     */
-   std::vector<int> range(
+   template<typename T=int>
+   std::vector<T> range(
          int begin,
          int end,
          int step=1
@@ -28,7 +30,7 @@ public:
    {
       assert( ( (end - begin)*step >= 0) && step != 0 );   // (end >= begin) => step > 0 && ...
       int n = std::abs(round((begin - end) / step));
-      std::vector<int> res(n);
+      std::vector<T> res(n);
       res[0] = begin;
       for ( int i = 1; i < n; i++ ) res[i] = res[i-1] + step;
       return res;
@@ -43,7 +45,7 @@ public:
     * @details product({0,1}, 3) --> 000 001 010 011 100 101 110 111
     */
    void product(
-         std::vector<int> pool,
+         std::vector<ColorType> pool,
          int r,
          CodeList &codeList
          )
@@ -80,7 +82,7 @@ public:
     * @details permutations({0,1,2,3}, 2) --> 01 02 03 12 13 23
     */
    void permutations(
-         std::vector<int> pool,
+         std::vector<ColorType> pool,
          int r,
          CodeList &codeList
          )

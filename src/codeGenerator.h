@@ -22,7 +22,7 @@ void allCodeGenerator(
 {
    assert( codeList.size() == 0 );
    Itertools itertools;
-   auto colors = itertools.range(0, config.nColors);
+   auto colors = itertools.range<ColorType>(0, config.nColors);
    if( config.duplicate )
    {
       itertools.product(colors, config.nPins, codeList);

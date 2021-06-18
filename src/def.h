@@ -9,9 +9,11 @@
 /*
  * データ型
  */
-typedef std::vector<int>      Code;
-typedef std::pair<int, int>   HitBlow;
-typedef std::deque<Code>      CodeList;
+using ColorType   = int;
+using HintType    = int;
+using Code        = std::vector<ColorType>;
+using HitBlow     = std::pair<HintType, HintType>;
+using CodeList    = std::deque<Code>;
 
 
 #endif // __DEF_H__
