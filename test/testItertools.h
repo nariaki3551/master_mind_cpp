@@ -44,7 +44,7 @@ TEST ( ItertoolsTest, rangeTest4 )
 TEST ( ItertoolsTest, permutationsTest1 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 2;
    CodeList codeList;
    itertools.permutations(pool, r, codeList);
@@ -62,7 +62,7 @@ TEST ( ItertoolsTest, permutationsTest1 )
 TEST ( ItertoolsTest, permutationsTest2 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 1;
    CodeList codeList;
    itertools.permutations(pool, r, codeList);
@@ -77,7 +77,7 @@ TEST ( ItertoolsTest, permutationsTest2 )
 TEST ( ItertoolsTest, permutationsTest3 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 3;
    CodeList codeList;
    itertools.permutations(pool, r, codeList);
@@ -98,7 +98,7 @@ TEST ( ItertoolsTest, permutationsTest3 )
 TEST ( ItertoolsTest, product1 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 2;
    CodeList codeList;
    itertools.product(pool, r, codeList);
@@ -119,7 +119,7 @@ TEST ( ItertoolsTest, product1 )
 TEST ( ItertoolsTest, product2 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 1;
    CodeList codeList;
    itertools.product(pool, r, codeList);
@@ -134,7 +134,7 @@ TEST ( ItertoolsTest, product2 )
 TEST ( ItertoolsTest, product3 )
 {
    Itertools itertools;
-   std::vector<int> pool{0,1,2};
+   std::vector<ColorType> pool{0,1,2};
    int r = 3;
    CodeList codeList;
    itertools.product(pool, r, codeList);
