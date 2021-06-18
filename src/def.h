@@ -9,8 +9,8 @@
 /*
  * データ型
  */
-using ColorType   = int;
-using HintType    = int;
+using ColorType   = short;
+using HintType    = short;
 using Code        = std::vector<ColorType>;
 using HitBlow     = std::pair<HintType, HintType>;
 using CodeList    = std::deque<Code>;
