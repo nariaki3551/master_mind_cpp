@@ -92,6 +92,7 @@ void runInteractive(
    // post process
    auto secret = S[0];
    std::cout << "secret is " << strCode(secret) << std::endl;
+   if ( secret ) delete secret;
 }
 
 
@@ -129,6 +130,7 @@ void runTest(
       auto end = std::chrono::system_clock::now();  // 計測終了時間
 
       assert( *testS[0] == *secret );
+      if ( testS[0] ) delete testS[0];
       double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
             end-start).count();  //処理に要した時間をミリ秒に変換
       countTable[i] = count;
@@ -150,6 +152,11 @@ void runTest(
       << "," << maxCount         << "," << averageCount
       << "," << totalTime        << "," << averageTime
       << std::endl;
+
+   for ( auto code : S )
+   {
+      if ( code ) delete code;
+   }
 }
 
 
