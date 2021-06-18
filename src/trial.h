@@ -49,10 +49,6 @@ auto trial(
       {
          newS.push_back(code);
       }
-      else
-      {
-         if ( code ) delete code;
-      }
    }
    S = newS;
 }

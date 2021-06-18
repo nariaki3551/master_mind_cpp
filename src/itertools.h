@@ -1,6 +1,7 @@
 #ifndef __ITERTOOLS_H__
 #define __ITERTOOLS_H__
 
+#include <memory>
 #include <cmath>
 #include "def.h"
 
@@ -53,7 +54,7 @@ public:
       assert( codePtrList.size() == 0 );
       for ( auto i : pool )
       {
-         codePtrList.push_back(new Code{i});
+         codePtrList.push_back(std::make_shared<Code>(Code{i}));
       }
       int n = 1;
       for ( int i = 0; i < (r-1); i++ )
@@ -65,11 +66,10 @@ public:
             codePtrList.pop_front();
             for ( auto k : pool )
             {
-               CodePtr newCode = new Code(*code);
+               CodePtr newCode = std::make_shared<Code>(Code(*code));
                newCode->push_back(k);
                codePtrList.push_back(newCode);
             }
-            if( code ) delete code;
          }
       }
    }
@@ -95,7 +95,7 @@ public:
       auto indices = range(0, n);
       auto cycles = range(n, n-r, -1);
       for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
-      codePtrList.push_back(new Code(code));
+      codePtrList.push_back(std::make_shared<Code>(Code(code)));
 
       bool finish = false;
       while ( !finish )
@@ -122,7 +122,7 @@ public:
                indices[i] = indices[n-j];
                indices[n-j] = tmp;
                for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
-               codePtrList.push_back(new Code(code));
+               codePtrList.push_back(std::make_shared<Code>(Code(code)));
                finish = false;
                break;
             }

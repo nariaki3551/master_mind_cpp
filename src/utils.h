@@ -2,6 +2,7 @@
 #define __UTILS_H__
 
 #include <sstream>
+#include <memory>
 #include <vector>
 
 #include "def.h"
@@ -150,9 +151,9 @@ CodePtrList copy(
       )
 {
    CodePtrList _codePtrList;
-   for ( auto i : codePtrList )
+   for ( auto code : codePtrList )
    {
-      _codePtrList.push_back(new Code(*i));
+      _codePtrList.push_back(std::make_shared<Code>(Code(*code)));
    }
    return _codePtrList;
 }
