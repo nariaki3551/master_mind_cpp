@@ -6,7 +6,8 @@ WORKDIR ${HOME}
 # install packages via apt  # aptを使って色々install
 RUN apt update -y
 RUN apt install -y tzdata
-RUN apt install -y build-essential cmake vim git valgrind libpthread-stubs0-dev libgtest-dev
+RUN apt install -y build-essential cmake vim git valgrind screen \
+                   libpthread-stubs0-dev libgtest-dev
 
 # copy local files into image
 COPY . .
