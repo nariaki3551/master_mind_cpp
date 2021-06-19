@@ -12,6 +12,7 @@ target_compile_options(
   utest PRIVATE
   -Wall
   -g
+  --coverage
   )
 
 target_compile_features(
@@ -29,4 +30,5 @@ target_link_libraries(
 target_link_options(
   utest PRIVATE
   -g
+  --coverage
 )

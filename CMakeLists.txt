@@ -24,3 +24,14 @@ add_test(
   COMMAND utest
   )
 
+# coverage test
+add_custom_target(
+  coverage
+  DEPENDS utest
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  COMMAND ctest
+  COMMAND lcov -d test/CMakeFiles/utest.dir/ -c -o coverage.info > lcov.log 2>&1
+  COMMAND lcov -e coverage.info ${PROJECT_SOURCE_DIR}/src/* -o filtered_coverage.info >> lcov.log 2>&1
+  COMMAND genhtml -o lcovHtml --num-spaces 4 -s --legend filtered_coverage.info >> lcov.log 2>&1
+  COMMENT [[create coverage report as lcovHtml/index.html, and log as lcov.log]]
+  )
