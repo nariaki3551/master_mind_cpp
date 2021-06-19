@@ -20,7 +20,7 @@ namespace MasterMind
  */
 void runInteractive(
       Config &config
-      )
+      ) noexcept
 {
    CodePtrList S;
    allCodeGenerator(config, S);
@@ -55,7 +55,7 @@ void runInteractive(
  */
 void runTest(
       Config &config
-      )
+      ) noexcept
 {
    CodePtrList S;
    allCodeGenerator(config, S);

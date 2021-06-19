@@ -30,7 +30,7 @@ public:
          int begin,
          int end,
          int step=1
-         )
+         ) noexcept
    {
       assert( ( (end - begin)*step >= 0) && step != 0 );   // (end >= begin) => step > 0 && ...
       int n = std::abs(round((begin - end) / step));
@@ -52,7 +52,7 @@ public:
          std::vector<ColorType> pool,
          int r,
          CodePtrList &codePtrList
-         )
+         ) noexcept
    {
       assert( codePtrList.size() == 0 );
       for ( auto i : pool )
@@ -89,7 +89,7 @@ public:
          std::vector<ColorType> pool,
          int r,
          CodePtrList &codePtrList
-         )
+         ) noexcept
    {
       assert( static_cast<decltype(pool.size())>(r) <= pool.size() );
       assert( codePtrList.size() == 0 );

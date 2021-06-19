@@ -20,7 +20,7 @@ namespace MasterMind
 */
 std::string strCode(
       Code &code
-      )
+      ) noexcept
 {
    std::ostringstream os;
    os << "[";
@@ -41,7 +41,7 @@ std::string strCode(
 */
 std::string strCode(
       CodePtr code
-      )
+      ) noexcept
 {
    return strCode(*code);
 }
@@ -61,7 +61,7 @@ auto countHitBlow(
       Code &code,
       Code &guess,
       Config &config
-      )
+      ) noexcept
 {
    if ( x.size() < static_cast<decltype(x.size())>(config.nColors) )
    {
@@ -99,7 +99,7 @@ auto countHitBlow(
 */
 CodePtrList copy(
       CodePtrList &codePtrList
-      )
+      ) noexcept
 {
    CodePtrList _codePtrList;
    for ( auto code : codePtrList )

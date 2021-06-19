@@ -23,7 +23,7 @@ namespace MasterMind
 auto randomPolicy(
       CodePtrList &S,
       CodePtrList &G
-      )
+      ) noexcept
 {
    // random sampling from G
    std::mt19937 engine(0);
@@ -44,7 +44,7 @@ auto minmaxPolicy(
       CodePtrList &S,
       CodePtrList &G,
       Config &config
-      )
+      ) noexcept
 {
    Code guess;
    int bestScore = S.size();
@@ -89,7 +89,7 @@ auto policy(
       CodePtrList &S,
       CodePtrList &G,
       Config &config
-      )
+      ) noexcept
 {
    if ( config.policyType == "random" )
    {

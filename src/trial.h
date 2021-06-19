@@ -22,7 +22,7 @@ auto trial(
       CodePtrList &S,
       Code &guess,
       Config &config
-      )
+      ) noexcept
 {
    // 推論コードの表示
    if ( config.interactive )
