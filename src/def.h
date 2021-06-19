@@ -17,7 +17,7 @@ using ColorType   = short;
 using HintType    = short;
 using Code        = std::vector<ColorType>;
 using CodePtr     = std::shared_ptr<Code>;
-using HitBlow     = std::pair<HintType, HintType>;
+using Hint        = std::pair<HintType, HintType>;
 using CodeList    = std::deque<Code>;
 using CodePtrList = std::deque<CodePtr>;
 

@@ -3,6 +3,7 @@
 #include <argparse/argparse.hpp>
 
 #include "def.h"
+#include "config.h"
 #include "utils.h"
 #include "policy.h"
 #include "trial.h"
@@ -24,9 +25,11 @@ void runInteractive(
    CodePtrList S;
    allCodeGenerator(config, S);
 
+   CodeList guessHist;
+
    // main
    int count = 0;
-   decltype(policy(S, S)) guess;
+   decltype(policy(S, S, config)) guess;
    while( S.size() > 1 )
    {
       count++;
@@ -35,7 +38,7 @@ void runInteractive(
          << "count:  " << count
          << ", #S: " << S.size()
          << std::endl;
-      guess = policy(S, S);      // G <- S
+      guess = policy(S, S, config);
       trial(S, guess, config);   // update S
    }
 
@@ -70,11 +73,12 @@ void runTest(
       int count = 0;
 
       auto start = std::chrono::system_clock::now(); // 計測開始時間
+      decltype(policy(testS, testS, config)) guess;
       while( testS.size() > 1 )
       {
          count++;
-         auto guess = policy(testS, testS);  // G <- S
-         trial(testS, guess, config);        // update S
+         guess = policy(testS, testS, config); // G <- S
+         trial(testS, guess, config);  // update S
       }
       auto end = std::chrono::system_clock::now();  // 計測終了時間
 
@@ -125,6 +129,11 @@ Config getConfig(
       .help("number of pins")
       .action([](const std::string& value) { return std::stoi(value); });
 
+   program.add_argument("--policy_type")
+      .help("type of policy: random, minmax")
+      .default_value(std::string("random"))
+      .action([](const std::string& value) { return value; });
+
    program.add_argument("--no_duplicate")
       .help("secret codes donot have color duplication")
       .default_value(false)
@@ -149,9 +158,10 @@ Config getConfig(
    int nPins = program.get<int>("num_pins");
    bool duplicate = !program.get<bool>("--no_duplicate");
    bool interactive = !program.get<bool>("--test");
+   std::string policyType = program.get<std::string>("--policy_type");
 
    // create config object
-   Config config{nColors, nPins, duplicate, interactive};
+   Config config{nColors, nPins, duplicate, interactive, policyType};
    return config;
 }
 

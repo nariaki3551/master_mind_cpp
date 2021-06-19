@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "def.h"
+#include "config.h"
 #include "utils.h"
 
 
@@ -29,26 +30,26 @@ auto trial(
       std::cout << "guess is " << strCode(guess) << std::endl;
    }
 
-   HitBlow InputHitBlow;
+   Hint InputHint;
    if ( config.interactive )
    {
       // 入力待ち
       int hit, blow;
       std::cout << " input hit blow (e.g. 2 2): ";
       std::cin >> hit >> blow;
-      InputHitBlow = HitBlow(hit, blow);
+      InputHint = Hint(hit, blow);
    }
    else
    {
       // config.secretから正解
-      InputHitBlow = countHitBlow(config.secret, guess, config);
+      InputHint = countHitBlow(config.secret, guess, config);
    }
 
    // 選別
    CodePtrList newS;
    for ( auto code : S )
    {
-      if( countHitBlow(*code, guess, config) == InputHitBlow )
+      if( countHitBlow(*code, guess, config) == InputHint )
       {
          newS.push_back(code);
       }
