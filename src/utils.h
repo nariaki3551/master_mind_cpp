@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "def.h"
+#include "config.h"
 
 
 namespace MasterMind
@@ -46,70 +47,10 @@ std::string strCode(
 }
 
 
-/**
- * パラメータ管理
- */
-class Config
-{
-   public:
-      int nColors;      // number of colors
-      int nPins;        // number of pins
-      bool duplicate;   // if it is true, then color-duplication is allowed
-      bool interactive; // if it is true, then test by user input
-      Code secret;      // for test
-
-      /**
-      * @brief Constructor
-      * @param[in] inNColors 色数
-      * @param[in] inNPins ピン数
-      * @param[in] inDuplicate 色の重複を許すかどうか
-      */
-      Config(
-            int inNColors,
-            int inNPins,
-            bool inDuplicate,
-            bool inInteractive=true
-            )
-         :
-            nColors(inNColors),
-            nPins(inNPins),
-            duplicate(inDuplicate),
-            interactive(inInteractive)
-      {}
-
-
-      /**
-       * @brief setter of secret
-       * @param[in] code コード
-       */
-      void setSecret(
-            Code code
-            )
-      {
-         secret = code;
-      }
-
-
-      /**
-      * @brief 管理情報をstringにする
-      * @return std::string
-      */
-      std::string str()
-      {
-         std::ostringstream os;
-         os << "Config:" << std::endl;
-         os << "  nColors: " << nColors << std::endl;
-         os << "  nPins: " << nPins << std::endl;
-         os << "  duplicate: " << duplicate << std::endl;
-         return os.str();
-      }
-};
-
-
 std::vector<int> x(1, 0);
 std::vector<int> y(1, 0);
 /**
-* @fn HitBlow countHitBlow(Code &code, Code &guess)
+* @fn Hint countHitBlow(Code &code, Code &guess)
 * @brief コード2つから, hit, blowを計算する
 * @param[in] code コード
 * @param[in] guess コード
@@ -146,7 +87,7 @@ auto countHitBlow(
    {
       blow += std::min(x[i], y[i]);
    }
-   return HitBlow(hit, blow);
+   return Hint(hit, blow);
 }
 
 
