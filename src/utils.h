@@ -2,6 +2,7 @@
 #define __UTILS_H__
 
 #include <sstream>
+#include <memory>
 #include <vector>
 
 #include "def.h"
@@ -14,7 +15,7 @@
 * @return コードのstring
 */
 std::string strCode(
-      Code code
+      Code &code
       )
 {
    std::ostringstream os;
@@ -25,6 +26,20 @@ std::string strCode(
    }
    os << " ]";
    return os.str();
+}
+
+
+/**
+* @fn std::string showCode(Code code)
+* @brief コードを表示する
+* @param[in] code コード
+* @return コードのstring
+*/
+std::string strCode(
+      CodePtr code
+      )
+{
+   return strCode(*code);
 }
 
 
@@ -122,6 +137,25 @@ auto countHitBlow(
        blow += std::min(x[i], y[i]);
     }
     return HitBlow(hit, blow);
+}
+
+
+/**
+* @fn HitBlow countHitBlow(Code &code, Code &guess)
+* @brief copi CodePtrList
+* @param[in] codePtrList
+* @return copied codePtrList
+*/
+CodePtrList copy(
+      CodePtrList &codePtrList
+      )
+{
+   CodePtrList _codePtrList;
+   for ( auto code : codePtrList )
+   {
+      _codePtrList.push_back(std::make_shared<Code>(Code(*code)));
+   }
+   return _codePtrList;
 }
 
 

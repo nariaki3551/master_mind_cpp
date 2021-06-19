@@ -71,7 +71,7 @@ void runInteractive(
       Config &config
       )
 {
-   CodeList S;
+   CodePtrList S;
    allCodeGenerator(config, S);
 
    // main
@@ -104,7 +104,7 @@ void runTest(
       Config &config
       )
 {
-   CodeList S;
+   CodePtrList S;
    allCodeGenerator(config, S);
 
    std::vector<int> countTable(S.size());
@@ -114,8 +114,8 @@ void runTest(
    for ( auto secret : S )
    {
       // test code
-      config.setSecret(secret);
-      CodeList testS = S;
+      config.setSecret(*secret);
+      CodePtrList testS = copy(S);
 
       int count = 0;
 
@@ -128,7 +128,7 @@ void runTest(
       }
       auto end = std::chrono::system_clock::now();  // 計測終了時間
 
-      assert( testS[0] == secret );
+      assert( *testS[0] == *secret );
       double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
             end-start).count();  //処理に要した時間をミリ秒に変換
       countTable[i] = count;
