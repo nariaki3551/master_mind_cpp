@@ -122,7 +122,7 @@ auto countHitBlow(
       Config &config
       )
 {
-   if ( x.size() < config.nColors )
+   if ( x.size() < static_cast<decltype(x.size())>(config.nColors) )
    {
       x.resize(config.nColors);
       y.resize(config.nColors);
