@@ -7,6 +7,9 @@
 #include <vector>
 
 
+namespace MasterMind
+{
+
 /*
  * データ型
  */
@@ -17,6 +20,8 @@ using CodePtr     = std::shared_ptr<Code>;
 using HitBlow     = std::pair<HintType, HintType>;
 using CodeList    = std::deque<Code>;
 using CodePtrList = std::deque<CodePtr>;
+
+};  // MasterMind
 
 
 #endif // __DEF_H__

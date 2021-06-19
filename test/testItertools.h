@@ -5,6 +5,7 @@
 
 #include "itertools.h"
 
+namespace mm = MasterMind;
 
 /**
  *
@@ -16,25 +17,25 @@
  */
 TEST ( ItertoolsTest, rangeTest1 )
 {
-   Itertools itertools;
+   mm::Itertools itertools;
    std::vector v{0, 1, 2, 3, 4};
    ASSERT_EQ( itertools.range(0, 5), v );
 }
 TEST ( ItertoolsTest, rangeTest2 )
 {
-   Itertools itertools;
+   mm::Itertools itertools;
    std::vector v{-1, 0, 1, 2, 3, 4};
    ASSERT_EQ( itertools.range(-1, 5), v );
 }
 TEST ( ItertoolsTest, rangeTest3 )
 {
-   Itertools itertools;
+   mm::Itertools itertools;
    std::vector v{5, 4, 3, 2, 1};
    ASSERT_EQ( itertools.range(5, 0, -1), v );
 }
 TEST ( ItertoolsTest, rangeTest4 )
 {
-   Itertools itertools;
+   mm::Itertools itertools;
    std::vector v{2, 1, 0};
    ASSERT_EQ( itertools.range(2, -1, -1), v );
 }
@@ -43,19 +44,19 @@ TEST ( ItertoolsTest, rangeTest4 )
  */
 TEST ( ItertoolsTest, permutationsTest1 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 2;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.permutations(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0,1},
-      Code{0,2},
-      Code{1,0},
-      Code{1,2},
-      Code{2,0},
-      Code{2,1},
+   mm::CodeList ans{
+      mm::Code{0,1},
+      mm::Code{0,2},
+      mm::Code{1,0},
+      mm::Code{1,2},
+      mm::Code{2,0},
+      mm::Code{2,1},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );
@@ -66,16 +67,16 @@ TEST ( ItertoolsTest, permutationsTest1 )
 }
 TEST ( ItertoolsTest, permutationsTest2 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 1;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.permutations(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0},
-      Code{1},
-      Code{2},
+   mm::CodeList ans{
+      mm::Code{0},
+      mm::Code{1},
+      mm::Code{2},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );
@@ -86,19 +87,19 @@ TEST ( ItertoolsTest, permutationsTest2 )
 }
 TEST ( ItertoolsTest, permutationsTest3 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 3;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.permutations(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0,1,2},
-      Code{0,2,1},
-      Code{1,0,2},
-      Code{1,2,0},
-      Code{2,0,1},
-      Code{2,1,0},
+   mm::CodeList ans{
+      mm::Code{0,1,2},
+      mm::Code{0,2,1},
+      mm::Code{1,0,2},
+      mm::Code{1,2,0},
+      mm::Code{2,0,1},
+      mm::Code{2,1,0},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );
@@ -112,22 +113,22 @@ TEST ( ItertoolsTest, permutationsTest3 )
  */
 TEST ( ItertoolsTest, product1 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 2;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.product(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0,0},
-      Code{0,1},
-      Code{0,2},
-      Code{1,0},
-      Code{1,1},
-      Code{1,2},
-      Code{2,0},
-      Code{2,1},
-      Code{2,2},
+   mm::CodeList ans{
+      mm::Code{0,0},
+      mm::Code{0,1},
+      mm::Code{0,2},
+      mm::Code{1,0},
+      mm::Code{1,1},
+      mm::Code{1,2},
+      mm::Code{2,0},
+      mm::Code{2,1},
+      mm::Code{2,2},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );
@@ -138,16 +139,16 @@ TEST ( ItertoolsTest, product1 )
 }
 TEST ( ItertoolsTest, product2 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 1;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.product(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0},
-      Code{1},
-      Code{2},
+   mm::CodeList ans{
+      mm::Code{0},
+      mm::Code{1},
+      mm::Code{2},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );
@@ -158,22 +159,22 @@ TEST ( ItertoolsTest, product2 )
 }
 TEST ( ItertoolsTest, product3 )
 {
-   Itertools itertools;
-   std::vector<ColorType> pool{0,1,2};
+   mm::Itertools itertools;
+   std::vector<mm::ColorType> pool{0,1,2};
    int r = 3;
-   CodePtrList codePtrList;
+   mm::CodePtrList codePtrList;
    itertools.product(pool, r, codePtrList);
 
-   CodeList ans{
-      Code{0,0,0}, Code{0,0,1}, Code{0,0,2},
-      Code{0,1,0}, Code{0,1,1}, Code{0,1,2},
-      Code{0,2,0}, Code{0,2,1}, Code{0,2,2},
-      Code{1,0,0}, Code{1,0,1}, Code{1,0,2},
-      Code{1,1,0}, Code{1,1,1}, Code{1,1,2},
-      Code{1,2,0}, Code{1,2,1}, Code{1,2,2},
-      Code{2,0,0}, Code{2,0,1}, Code{2,0,2},
-      Code{2,1,0}, Code{2,1,1}, Code{2,1,2},
-      Code{2,2,0}, Code{2,2,1}, Code{2,2,2},
+   mm::CodeList ans{
+      mm::Code{0,0,0}, mm::Code{0,0,1}, mm::Code{0,0,2},
+      mm::Code{0,1,0}, mm::Code{0,1,1}, mm::Code{0,1,2},
+      mm::Code{0,2,0}, mm::Code{0,2,1}, mm::Code{0,2,2},
+      mm::Code{1,0,0}, mm::Code{1,0,1}, mm::Code{1,0,2},
+      mm::Code{1,1,0}, mm::Code{1,1,1}, mm::Code{1,1,2},
+      mm::Code{1,2,0}, mm::Code{1,2,1}, mm::Code{1,2,2},
+      mm::Code{2,0,0}, mm::Code{2,0,1}, mm::Code{2,0,2},
+      mm::Code{2,1,0}, mm::Code{2,1,1}, mm::Code{2,1,2},
+      mm::Code{2,2,0}, mm::Code{2,2,1}, mm::Code{2,2,2},
    };
 
    ASSERT_EQ( codePtrList.size(), ans.size() );

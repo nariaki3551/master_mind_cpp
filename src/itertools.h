@@ -6,6 +6,9 @@
 #include "def.h"
 
 
+namespace MasterMind
+{
+
 /**
  * @brief iterator管理用
  */
@@ -130,6 +133,8 @@ public:
       }
    }
 };
+
+}; // MasterMind
 
 
 #endif // __ITERTOOLS_H__

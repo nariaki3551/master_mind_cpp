@@ -7,6 +7,8 @@
 #include "utils.h"
 #include "itertools.h"
 
+namespace MasterMind
+{
 
 /**
 * @fn CodePtrList allCodeGenerator(Config &config, CodePtrList &codePtrList)
@@ -31,6 +33,8 @@ void allCodeGenerator(
       itertools.permutations(colors, config.nPins, codePtrList);
    }
 }
+
+}; // MasterMind
 
 
 #endif // __CODE_GENERATOR_H__

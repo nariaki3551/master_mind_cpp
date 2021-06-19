@@ -9,58 +9,8 @@
 #include "codeGenerator.h"
 
 
-/**
-* @fn Config getConfig(int argc, char *argv[])
-* @brief コマンドライン入力を受けとる
-* @param[in] argc
-* @param[in] argv
-* @return Config パラメタ管理クラス
-*/
-Config getConfig(
-      int argc,
-      char *argv[]
-      )
+namespace MasterMind
 {
-   argparse::ArgumentParser program("master mind");
-
-   program.add_argument("num_colors")
-      .help("number of colors")
-      .action([](const std::string& value) { return std::stoi(value); });
-
-   program.add_argument("num_pins")
-      .help("number of pins")
-      .action([](const std::string& value) { return std::stoi(value); });
-
-   program.add_argument("--no_duplicate")
-      .help("secret codes donot have color duplication")
-      .default_value(false)
-      .implicit_value(true);
-
-   program.add_argument("--test")
-      .help("run test mode")
-      .default_value(false)
-      .implicit_value(true);
-   try
-   {
-      program.parse_args(argc, argv);
-   }
-   catch (const std::runtime_error& err)
-   {
-      std::cout << err.what() << std::endl;
-      std::cout << program;
-      exit(0);
-   }
-
-   int nColors = program.get<int>("num_colors");
-   int nPins = program.get<int>("num_pins");
-   bool duplicate = !program.get<bool>("--no_duplicate");
-   bool interactive = !program.get<bool>("--test");
-
-   // create config object
-   Config config{nColors, nPins, duplicate, interactive};
-   return config;
-}
-
 
 /**
  * @fn void runInteractive(Config &config)
@@ -153,21 +103,77 @@ void runTest(
 }
 
 
+/**
+* @fn Config getConfig(int argc, char *argv[])
+* @brief コマンドライン入力を受けとる
+* @param[in] argc
+* @param[in] argv
+* @return Config パラメタ管理クラス
+*/
+Config getConfig(
+      int argc,
+      char *argv[]
+      )
+{
+   argparse::ArgumentParser program("master mind");
+
+   program.add_argument("num_colors")
+      .help("number of colors")
+      .action([](const std::string& value) { return std::stoi(value); });
+
+   program.add_argument("num_pins")
+      .help("number of pins")
+      .action([](const std::string& value) { return std::stoi(value); });
+
+   program.add_argument("--no_duplicate")
+      .help("secret codes donot have color duplication")
+      .default_value(false)
+      .implicit_value(true);
+
+   program.add_argument("--test")
+      .help("run test mode")
+      .default_value(false)
+      .implicit_value(true);
+   try
+   {
+      program.parse_args(argc, argv);
+   }
+   catch (const std::runtime_error& err)
+   {
+      std::cout << err.what() << std::endl;
+      std::cout << program;
+      exit(0);
+   }
+
+   int nColors = program.get<int>("num_colors");
+   int nPins = program.get<int>("num_pins");
+   bool duplicate = !program.get<bool>("--no_duplicate");
+   bool interactive = !program.get<bool>("--test");
+
+   // create config object
+   Config config{nColors, nPins, duplicate, interactive};
+   return config;
+}
+
+}; // MasterMind
+
+
 int main(
       int argc,
       char *argv[]
       )
 {
-   Config config = getConfig(argc, argv);
+   namespace mm = MasterMind;
+   mm::Config config = mm::getConfig(argc, argv);
    std::cout << config.str() << std::endl;
 
    if ( config.interactive )
    {
-      runInteractive(config);
+      mm::runInteractive(config);
    }
    else
    {
-      runTest(config);
+      mm::runTest(config);
    }
 
    return 0;
