@@ -6,6 +6,9 @@
 #include "def.h"
 
 
+namespace MasterMind
+{
+
 /**
 * @fn Code policy(CodePtrList S, CodePtrList G)
 * @brief 推論コード候補集合Gから1つを選択する
@@ -24,6 +27,8 @@ auto policy(
    Code guess = Code(*G[sampler(engine)]);
    return guess;
 }
+
+}  // MasterMind
 
 
 #endif   // __POLICY_H__

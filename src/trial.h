@@ -7,6 +7,9 @@
 #include "utils.h"
 
 
+namespace MasterMind
+{
+
 /**
 * @fn Code trial(CodePtrList &S, Code &guess, Config &config)
 * @brief 推論コード候補集合Gから1つを選択する
@@ -52,6 +55,8 @@ auto trial(
    }
    S = newS;
 }
+
+}; // MasterMind
 
 
 #endif   //__TRIAL_H__

@@ -8,6 +8,9 @@
 #include "def.h"
 
 
+namespace MasterMind
+{
+
 /**
 * @fn std::string showCode(Code code)
 * @brief コードを表示する
@@ -103,6 +106,8 @@ class Config
 };
 
 
+std::vector<int> x(1, 0);
+std::vector<int> y(1, 0);
 /**
 * @fn HitBlow countHitBlow(Code &code, Code &guess)
 * @brief コード2つから, hit, blowを計算する
@@ -117,31 +122,36 @@ auto countHitBlow(
       Config &config
       )
 {
-    std::vector<int> x(config.nColors, 0);
-    std::vector<int> y(config.nColors, 0);
-    int hit = 0, blow = 0;
-    for( int i = 0; i < config.nPins; i++ )
-    {
-       if( code[i] == guess[i] )
-       {
-          hit++;
-       }
-       else
-       {
-          x[code[i]]++;
-          y[guess[i]]++;
-       }
-    }
-    for( int i = 0; i < config.nColors; i++ )
-    {
-       blow += std::min(x[i], y[i]);
-    }
-    return HitBlow(hit, blow);
+   if ( x.size() < config.nColors )
+   {
+      x.resize(config.nColors);
+      y.resize(config.nColors);
+   }
+   std::fill(x.begin(), x.end(), 0);
+   std::fill(y.begin(), y.end(), 0);
+   int hit = 0, blow = 0;
+   for( int i = 0; i < config.nPins; i++ )
+   {
+      if( code[i] == guess[i] )
+      {
+         hit++;
+      }
+      else
+      {
+         x[code[i]]++;
+         y[guess[i]]++;
+      }
+   }
+   for( int i = 0; i < config.nColors; i++ )
+   {
+      blow += std::min(x[i], y[i]);
+   }
+   return HitBlow(hit, blow);
 }
 
 
 /**
-* @fn HitBlow countHitBlow(Code &code, Code &guess)
+* @fn CodePtrList code(CodePtrList &codePtrList)
 * @brief copi CodePtrList
 * @param[in] codePtrList
 * @return copied codePtrList
@@ -157,6 +167,8 @@ CodePtrList copy(
    }
    return _codePtrList;
 }
+
+}; // MasterMind
 
 
 #endif   // __UTILS_H__
