@@ -85,6 +85,7 @@ auto minmaxPolicy(
 * @param[in] config パラメタ
 * @return 推論コード
 */
+inline
 auto policy(
       CodePtrList &S,
       CodePtrList &G,

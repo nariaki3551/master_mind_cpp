@@ -26,6 +26,7 @@ public:
     *          range(5, -1, -1) --> {5, 4, 3, 2, 1}
     */
    template<typename T=int>
+   inline
    std::vector<T> range(
          int begin,
          int end,

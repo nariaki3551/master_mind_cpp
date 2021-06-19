@@ -18,6 +18,7 @@ namespace MasterMind
 * @param[in] code コード
 * @return コードのstring
 */
+inline
 std::string strCode(
       Code &code
       ) noexcept
@@ -39,6 +40,7 @@ std::string strCode(
 * @param[in] code コード
 * @return コードのstring
 */
+inline
 std::string strCode(
       CodePtr code
       ) noexcept
@@ -57,6 +59,7 @@ std::vector<int> y(1, 0);
 * @param[in] config パラメタ
 * @return (hit, blow)
 */
+inline
 auto countHitBlow(
       Code &code,
       Code &guess,
@@ -97,6 +100,7 @@ auto countHitBlow(
 * @param[in] codePtrList
 * @return copied codePtrList
 */
+inline
 CodePtrList copy(
       CodePtrList &codePtrList
       ) noexcept

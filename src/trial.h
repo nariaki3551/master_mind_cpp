@@ -18,6 +18,7 @@ namespace MasterMind
 * @param[in] guess 推論コード
 * @param[in] config パラメタ
 */
+inline
 auto trial(
       CodePtrList &S,
       Code &guess,
