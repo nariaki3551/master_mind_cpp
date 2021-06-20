@@ -65,7 +65,7 @@ void setGuessCandidates(
       }
    }
 
-   if ( histColors.size() >= config.nColors - 1 )
+   if ( static_cast<int>(histColors.size()) >= config.nColors - 1 )
    {
       guessCandidates = codePtrList;
       return;
@@ -73,7 +73,7 @@ void setGuessCandidates(
 
    Itertools itertools;
    auto colors = itertools.range<ColorType>(0, config.nColors);
-   ColorType minColorNotInHist;
+   ColorType minColorNotInHist = -1;
    for ( auto color : colors )
    {
       if ( histColors.find(color) == histColors.end() )
@@ -82,6 +82,7 @@ void setGuessCandidates(
          break;
       }
    }
+   assert( minColorNotInHist != -1 );
 
    // extract guess code
    for ( auto code : codePtrList )
