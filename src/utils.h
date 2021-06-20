@@ -74,7 +74,7 @@ auto countHitBlow(
    std::fill(x.begin(), x.end(), 0);
    std::fill(y.begin(), y.end(), 0);
    int hit = 0, blow = 0;
-   for( int i = 0; i < config.nPins; i++ )
+   for( int i = 0; i < config.nPins; ++i )
    {
       if( code[i] == guess[i] )
       {
@@ -86,7 +86,7 @@ auto countHitBlow(
          y[guess[i]]++;
       }
    }
-   for( int i = 0; i < config.nColors; i++ )
+   for( int i = 0; i < config.nColors; ++i )
    {
       blow += std::min(x[i], y[i]);
    }

@@ -37,7 +37,7 @@ public:
       int n = std::abs(round((begin - end) / step));
       std::vector<T> res(n);
       res[0] = begin;
-      for ( int i = 1; i < n; i++ ) res[i] = res[i-1] + step;
+      for ( int i = 1; i < n; ++i ) res[i] = res[i-1] + step;
       return res;
    }
 
@@ -61,10 +61,10 @@ public:
          codePtrList.push_back(std::make_shared<Code>(Code{i}));
       }
       int n = 1;
-      for ( int i = 0; i < (r-1); i++ )
+      for ( int i = 0; i < (r-1); ++i )
       {
          n *= pool.size();
-         for ( int j = 0; j < n; j++ )
+         for ( int j = 0; j < n; ++j )
          {
             CodePtr code = codePtrList.front();
             codePtrList.pop_front();
@@ -98,21 +98,21 @@ public:
       int n = pool.size();
       auto indices = range(0, n);
       auto cycles = range(n, n-r, -1);
-      for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
+      for ( int k = 0; k < r; ++k ) code[k] = pool[indices[k]];
       codePtrList.push_back(std::make_shared<Code>(Code(code)));
 
       bool finish = false;
       while ( !finish )
       {
          finish = true;
-         for ( auto i : range(r-1, -1, -1) )
+         for ( int i = r-1; i >= 0; --i )
          {
             cycles[i]--;
             if ( cycles[i] == 0 )
             {
                // cycle i -- n-1 --> i+1, ..., n-1, i
                auto tmp = indices[i];
-               for ( int j = i; j < n-1; j++ )
+               for ( int j = i; j < n-1; ++j )
                {
                   indices[j] = indices[j+1];
                }
@@ -125,7 +125,7 @@ public:
                auto tmp = indices[i];
                indices[i] = indices[n-j];
                indices[n-j] = tmp;
-               for ( int k = 0; k < r; k++ ) code[k] = pool[indices[k]];
+               for ( int k = 0; k < r; ++k ) code[k] = pool[indices[k]];
                codePtrList.push_back(std::make_shared<Code>(Code(code)));
                finish = false;
                break;
