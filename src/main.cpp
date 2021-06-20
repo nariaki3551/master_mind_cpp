@@ -130,7 +130,7 @@ Config getConfig(
       .action([](const std::string& value) { return std::stoi(value); });
 
    program.add_argument("--policy_type")
-      .help("type of policy: random, minmax")
+      .help("type of policy: random, minmax, exp_minmax, entropy")
       .default_value(std::string("random"))
       .action([](const std::string& value) { return value; });
 
