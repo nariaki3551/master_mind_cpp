@@ -20,7 +20,7 @@ namespace MasterMind
  */
 void runInteractive(
       Config &config
-      )
+      ) noexcept
 {
    CodePtrList S;
    allCodeGenerator(config, S);
@@ -55,7 +55,7 @@ void runInteractive(
  */
 void runTest(
       Config &config
-      )
+      ) noexcept
 {
    CodePtrList S;
    allCodeGenerator(config, S);
@@ -91,10 +91,13 @@ void runTest(
    }
 
    // output statistics
-   int maxCount = *std::max_element(countTable.begin(), countTable.end());
-   double averageCount = std::accumulate(countTable.begin(), countTable.end(), 0.0) / countTable.size();
-   double totalTime = std::accumulate(timeTable.begin(), timeTable.end(), 0.0);
-   double averageTime = totalTime / timeTable.size();
+   auto getMax = [&](auto &v){ return *std::max_element(v.cbegin(), v.cend()); };
+   auto getSum = [&](auto &v){ return std::accumulate(v.cbegin(), v.cend(), 0.0); };
+   auto getAve = [&](auto &v){ return getSum(v) / v.size(); };
+   int maxCount         = getMax(countTable);
+   double averageCount  = getAve(countTable);
+   double totalTime     = getSum(timeTable);
+   double averageTime   = getAve(timeTable);
    std::cout
       << "Log,num colors,num pins,policy,max count,average count,total time,average time"
       << std::endl;

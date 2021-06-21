@@ -21,10 +21,11 @@ namespace MasterMind
 * @param[in] G 推論コードの候補集合
 * @return 推論コード
 */
+inline
 auto randomPolicy(
       CodePtrList &S,
       CodePtrList &G
-      )
+      ) noexcept
 {
    // random sampling from G
    std::mt19937 engine(0);
@@ -41,10 +42,11 @@ auto randomPolicy(
  * @param[in] N size of S
  * @return the smaller the better score value
  */
+inline
 double minmax(
       std::map<Hint, int> &d,
       int N
-      )
+      ) noexcept
 {
    double maxElm = -1;
    for ( auto pair : d )
@@ -62,10 +64,11 @@ double minmax(
  * @param[in] N size of S
  * @return the smaller the better score value
  */
+inline
 double expMinmax(
       std::map<Hint, int> &d,
       int N
-      )
+      ) noexcept
 {
    double exp = 0;
    for ( auto pair : d )
@@ -83,10 +86,11 @@ double expMinmax(
  * @param[in] N size of S
  * @return the smaller the better score value
  */
+inline
 double entropy(
       std::map<Hint, int> &d,
       int N
-      )
+      ) noexcept
 {
    double minus_entropy = 0;
    double p;
@@ -112,12 +116,13 @@ double entropy(
 * @return 推論コード
 */
 template<class ObjFunc>
+inline
 auto distPolicy(
       CodePtrList &S,
       CodePtrList &G,
       ObjFunc objFunc,
       Config &config
-      )
+      ) noexcept
 {
    Code guess;
    double best, objValue;
@@ -156,11 +161,12 @@ auto distPolicy(
 * @param[in] config パラメタ
 * @return 推論コード
 */
+inline
 auto policy(
       CodePtrList &S,
       CodePtrList &G,
       Config &config
-      )
+      ) noexcept
 {
    if ( config.policy == "random" )
    {

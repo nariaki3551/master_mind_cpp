@@ -18,11 +18,12 @@ namespace MasterMind
 * @param[in] guess 推論コード
 * @param[in] config パラメタ
 */
+inline
 auto trial(
       CodePtrList &S,
       Code &guess,
       Config &config
-      )
+      ) noexcept
 {
    // 推論コードの表示
    if ( config.interactive )

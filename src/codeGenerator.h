@@ -19,7 +19,7 @@ namespace MasterMind
 void allCodeGenerator(
       Config &config,
       CodePtrList &codePtrList
-      )
+      ) noexcept
 {
    assert( codePtrList.size() == 0 );
    Itertools itertools;
