@@ -18,7 +18,7 @@ class Config
       int nPins;              // number of pins
       bool duplicate;         // if it is true, then color-duplication is allowed
       bool interactive;       // if it is true, then test by user input
-      std::string policyType; // policyType
+      std::string policy;     // policy
       Code secret;            // for test
 
       /**
@@ -32,14 +32,14 @@ class Config
             int inNPins,
             bool inDuplicate,
             bool inInteractive=true,
-            std::string inPolicyType="random"
+            std::string inPolicy="random"
             )
          :
             nColors(inNColors),
             nPins(inNPins),
             duplicate(inDuplicate),
             interactive(inInteractive),
-            policyType(inPolicyType)
+            policy(inPolicy)
       {}
 
 
@@ -66,7 +66,7 @@ class Config
          os << "  nColors: " << nColors << std::endl;
          os << "  nPins: " << nPins << std::endl;
          os << "  duplicate: " << duplicate << std::endl;
-         os << "  policy: " << policyType << std::endl;
+         os << "  policy: " << policy << std::endl;
          return os.str();
       }
 };

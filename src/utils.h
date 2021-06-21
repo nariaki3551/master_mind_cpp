@@ -18,9 +18,10 @@ namespace MasterMind
 * @param[in] code コード
 * @return コードのstring
 */
+inline
 std::string strCode(
       Code &code
-      )
+      ) noexcept
 {
    std::ostringstream os;
    os << "[";
@@ -39,9 +40,10 @@ std::string strCode(
 * @param[in] code コード
 * @return コードのstring
 */
+inline
 std::string strCode(
       CodePtr code
-      )
+      ) noexcept
 {
    return strCode(*code);
 }
@@ -57,11 +59,12 @@ std::vector<int> y(1, 0);
 * @param[in] config パラメタ
 * @return (hit, blow)
 */
+inline
 auto countHitBlow(
       Code &code,
       Code &guess,
       Config &config
-      )
+      ) noexcept
 {
    if ( x.size() < static_cast<decltype(x.size())>(config.nColors) )
    {
@@ -71,7 +74,7 @@ auto countHitBlow(
    std::fill(x.begin(), x.end(), 0);
    std::fill(y.begin(), y.end(), 0);
    int hit = 0, blow = 0;
-   for( int i = 0; i < config.nPins; i++ )
+   for( int i = 0; i < config.nPins; ++i )
    {
       if( code[i] == guess[i] )
       {
@@ -83,7 +86,7 @@ auto countHitBlow(
          y[guess[i]]++;
       }
    }
-   for( int i = 0; i < config.nColors; i++ )
+   for( int i = 0; i < config.nColors; ++i )
    {
       blow += std::min(x[i], y[i]);
    }
@@ -97,9 +100,10 @@ auto countHitBlow(
 * @param[in] codePtrList
 * @return copied codePtrList
 */
+inline
 CodePtrList copy(
       CodePtrList &codePtrList
-      )
+      ) noexcept
 {
    CodePtrList _codePtrList;
    for ( auto code : codePtrList )

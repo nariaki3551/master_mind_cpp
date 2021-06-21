@@ -20,7 +20,7 @@ namespace MasterMind
 void allCodeGenerator(
       Config &config,
       CodePtrList &codePtrList
-      )
+      ) noexcept
 {
    assert( codePtrList.size() == 0 );
    Itertools itertools;
@@ -46,12 +46,13 @@ void allCodeGenerator(
  * @param[out] guessCandidates 推測コード集合
  * @details まだ推測に使用されていない色についての区別は行わない
  */
+inline
 void setGuessCandidates(
       CodePtrList &codePtrList,
       CodeList &guessHist,
       Config &config,
       CodePtrList &guessCandidates
-      )
+      ) noexcept
 {
    assert ( guessCandidates.size() == 0 );
 
@@ -93,12 +94,8 @@ void setGuessCandidates(
       {
          if ( histColors.find(color) == histColors.end() )
          {
-            if ( tmp == -1 && color != minColorNotInHist )
-            {
-               insert = false;
-               break;
-            }
-            else if ( color < tmp )
+            if ( ( tmp == -1 && color != minColorNotInHist )
+                  || ( color < tmp ) )
             {
                insert = false;
                break;
