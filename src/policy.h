@@ -104,9 +104,10 @@ double entropy(
 
 /**
 * @fn Code minmaxPolicy(CodePtrList &S, CodePtrList &G, Config &config)
-* @brief 推論コード候補集合Gから, 施行後の最悪時の候補数が最小のものを選択する
+* @brief 推論コード候補集合Gから, objFuncの値が最小のものを選択する
 * @param[in] S 秘密コードの候補集合
 * @param[in] G 推論コードの候補集合
+* @param[in] objFunc 推論コード取得用のスコア関数
 * @param[in] config パラメタ
 * @return 推論コード
 */
