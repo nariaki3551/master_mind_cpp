@@ -25,11 +25,11 @@ void runInteractive(
    CodePtrList S;
    allCodeGenerator(config, S);
 
-   CodeList guessHist;
-
    // main
    int count = 0;
    decltype(policy(S, S, config)) guess;
+   CodePtrList G;
+   CodeList guessHist;
    while( S.size() > 1 )
    {
       count++;
@@ -38,8 +38,11 @@ void runInteractive(
          << "count:  " << count
          << ", #S: " << S.size()
          << std::endl;
-      guess = policy(S, S, config);
+      G.clear();
+      setGuessCandidates(S, guessHist, config, G);
+      guess = policy(S, G, config);
       trial(S, guess, config);   // update S
+      guessHist.push_back(guess);
    }
 
    // post process
@@ -69,6 +72,8 @@ void runTest(
       // test code
       config.setSecret(*secret);
       CodePtrList testS = copy(S);
+      CodeList guessHist;
+      CodePtrList G;
 
       int count = 0;
 
@@ -77,8 +82,11 @@ void runTest(
       while( testS.size() > 1 )
       {
          count++;
+         G.clear();
+         setGuessCandidates(S, guessHist, config, G);
          guess = policy(testS, testS, config); // G <- S
          trial(testS, guess, config);  // update S
+         guessHist.push_back(guess);
       }
       auto end = std::chrono::system_clock::now();  // 計測終了時間
 
