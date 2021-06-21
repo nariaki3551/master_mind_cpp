@@ -96,11 +96,12 @@ void runTest(
    double totalTime = std::accumulate(timeTable.begin(), timeTable.end(), 0.0);
    double averageTime = totalTime / timeTable.size();
    std::cout
-      << "Log,num colors,num pins,max count,average count,total time,average time"
+      << "Log,num colors,num pins,policy,max count,average count,total time,average time"
       << std::endl;
    std::cout
       << "log"
       << "," << config.nColors   << "," << config.nPins
+      << "," << config.policy
       << "," << maxCount         << "," << averageCount
       << "," << totalTime        << "," << averageTime
       << std::endl;
@@ -129,7 +130,7 @@ Config getConfig(
       .help("number of pins")
       .action([](const std::string& value) { return std::stoi(value); });
 
-   program.add_argument("--policy_type")
+   program.add_argument("--policy")
       .help("type of policy: random, minmax, exp_minmax, entropy")
       .default_value(std::string("random"))
       .action([](const std::string& value) { return value; });
@@ -158,10 +159,10 @@ Config getConfig(
    int nPins = program.get<int>("num_pins");
    bool duplicate = !program.get<bool>("--no_duplicate");
    bool interactive = !program.get<bool>("--test");
-   std::string policyType = program.get<std::string>("--policy_type");
+   std::string policy= program.get<std::string>("--policy");
 
    // create config object
-   Config config{nColors, nPins, duplicate, interactive, policyType};
+   Config config{nColors, nPins, duplicate, interactive, policy};
    return config;
 }
 

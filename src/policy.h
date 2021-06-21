@@ -161,19 +161,19 @@ auto policy(
       Config &config
       )
 {
-   if ( config.policyType == "random" )
+   if ( config.policy == "random" )
    {
       return randomPolicy(S, G);
    }
-   else if ( config.policyType == "minmax" )
+   else if ( config.policy == "minmax" )
    {
       return distPolicy(S, G, minmax, config);
    }
-   else if ( config.policyType == "exp_minmax" )
+   else if ( config.policy == "exp_minmax" )
    {
       return distPolicy(S, G, expMinmax, config);
    }
-   else if ( config.policyType == "entropy" )
+   else if ( config.policy == "entropy" )
    {
       return distPolicy(S, G, entropy, config);
    }
