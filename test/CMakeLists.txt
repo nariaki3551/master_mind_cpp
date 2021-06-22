@@ -22,6 +22,7 @@ target_compile_features(
 
 target_link_libraries(
   utest PRIVATE
+  master_mind_lib
   gtest
   gtest_main
   pthread
