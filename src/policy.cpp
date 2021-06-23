@@ -5,13 +5,15 @@ namespace MasterMind
 {
 
 
+std::mt19937 engine = std::mt19937(0);
+
+
 Code randomPolicy(
       CodePtrList &S,
       CodePtrList &G
       ) noexcept
 {
    // random sampling from G
-   std::mt19937 engine(0);
    std::uniform_int_distribution<> sampler(0, G.size()-1);
    Code guess = Code(*G[sampler(engine)]);
    return guess;
@@ -32,13 +34,6 @@ double minmax(
 }
 
 
-/**
- * @fn expMinMax(std::map<Hint, int> &d, int N)
- * @brief score function based on expMinMax policy
- * @param[in] d distribution of S by test code
- * @param[in] N size of S
- * @return the smaller the better score value
- */
 double expMinmax(
       std::map<Hint, int> &d,
       int N
@@ -53,13 +48,6 @@ double expMinmax(
 }
 
 
-/**
- * @fn entropy(std::map<Hint, int> &d, int N)
- * @brief score function based on entropy policy
- * @param[in] d distribution of S by test code
- * @param[in] N size of S
- * @return the smaller the better score value
- */
 double entropy(
       std::map<Hint, int> &d,
       int N
@@ -79,15 +67,6 @@ double entropy(
 }
 
 
-/**
-* @fn Code minmaxPolicy(CodePtrList &S, CodePtrList &G, Config &config)
-* @brief 推論コード候補集合Gから, objFuncの値が最小のものを選択する
-* @param[in] S 秘密コードの候補集合
-* @param[in] G 推論コードの候補集合
-* @param[in] objFunc 推論コード取得用のスコア関数
-* @param[in] config パラメタ
-* @return 推論コード
-*/
 template<class ObjFunc>
 Code distPolicy(
       CodePtrList &S,
@@ -125,14 +104,6 @@ Code distPolicy(
 }
 
 
-/**
-* @fn Code policy(CodePtrList S, CodePtrList G, Config &config)
-* @brief 推論コード候補集合Gから1つを選択する
-* @param[in] S 秘密コードの候補集合
-* @param[in] G 推論コードの候補集合
-* @param[in] config パラメタ
-* @return 推論コード
-*/
 Code policy(
       CodePtrList &S,
       CodePtrList &G,

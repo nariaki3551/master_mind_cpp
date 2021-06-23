@@ -15,6 +15,13 @@ namespace MasterMind
 
 
 /**
+ * @var engine
+ * @brief random policy用
+ */
+extern std::mt19937 engine;
+
+
+/**
 * @fn Code randomPolicy(CodePtrList S, CodePtrList G)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in] S 秘密コードの候補集合
