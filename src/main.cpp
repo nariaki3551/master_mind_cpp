@@ -41,7 +41,7 @@ void runInteractive(
       G.clear();
       setGuessCandidates(S, guessHist, config, G);
       guess = policy(S, G, config);
-      trial(S, guess, config);   // update S
+      trial(S, guess, config);
       guessHist.push_back(guess);
    }
 
@@ -84,8 +84,8 @@ void runTest(
          count++;
          G.clear();
          setGuessCandidates(S, guessHist, config, G);
-         guess = policy(testS, testS, config); // G <- S
-         trial(testS, guess, config);  // update S
+         guess = policy(testS, G, config);
+         trial(testS, guess, config);
          guessHist.push_back(guess);
       }
       auto end = std::chrono::system_clock::now();  // 計測終了時間
