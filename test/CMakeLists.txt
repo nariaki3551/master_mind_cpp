@@ -1,6 +1,10 @@
 add_executable(
   utest
-  test.cpp
+  testCodeGenerator.cpp
+  testItertools.cpp
+  testPolicy.cpp
+  testTrial.cpp
+  testUtils.cpp
   )
 
 target_include_directories(
