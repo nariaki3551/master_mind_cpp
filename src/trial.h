@@ -18,45 +18,12 @@ namespace MasterMind
 * @param[in] guess 推論コード
 * @param[in] config パラメタ
 */
-inline
-auto trial(
+void trial(
       CodePtrList &S,
       Code &guess,
       Config &config
-      ) noexcept
-{
-   // 推論コードの表示
-   if ( config.interactive )
-   {
-      std::cout << "guess is " << strCode(guess) << std::endl;
-   }
+      ) noexcept;
 
-   Hint InputHint;
-   if ( config.interactive )
-   {
-      // 入力待ち
-      int hit, blow;
-      std::cout << " input hit blow (e.g. 2 2): ";
-      std::cin >> hit >> blow;
-      InputHint = Hint(hit, blow);
-   }
-   else
-   {
-      // config.secretから正解
-      InputHint = countHitBlow(config.secret, guess, config);
-   }
-
-   // 選別
-   CodePtrList newS;
-   for ( auto code : S )
-   {
-      if( countHitBlow(*code, guess, config) == InputHint )
-      {
-         newS.push_back(code);
-      }
-   }
-   S = newS;
-}
 
 }; // MasterMind
 

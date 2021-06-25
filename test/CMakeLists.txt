@@ -1,6 +1,10 @@
 add_executable(
   utest
-  test.cpp
+  testCodeGenerator.cpp
+  testItertools.cpp
+  testPolicy.cpp
+  testTrial.cpp
+  testUtils.cpp
   )
 
 target_include_directories(
@@ -22,6 +26,7 @@ target_compile_features(
 
 target_link_libraries(
   utest PRIVATE
+  master_mind_lib
   gtest
   gtest_main
   pthread
