@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <omp.h>
 #include "policy.h"
 
 
@@ -75,13 +77,13 @@ Code distPolicy(
       Config &config
       ) noexcept
 {
-   Code guess;
-   double best, objValue;
-   bool first = true;
+   std::vector<double> objs(G.size());
    std::map<Hint, int> d;  // distribution
    Hint hint;
-   for ( auto code : G )
+#pragma omp parallel for private(hint) firstprivate(d)
+   for ( int i = 0; i < static_cast<int>(G.size()); ++i )
    {
+      auto code = G[i];
       d.clear();
       for ( auto _code : S )
       {
@@ -92,14 +94,12 @@ Code distPolicy(
          }
          d.at(hint)++;
       }
-      objValue = objFunc(d, S.size());
-      if ( first || objValue < best )
-      {
-         best = objValue;
-         guess = Code(*code);
-         first = false;
-      }
+      objs[i] = objFunc(d, S.size());
    }
+
+   auto iter = std::min_element(objs.begin(), objs.end());
+   int index = std::distance(objs.begin(), iter);
+   Code guess(*G[index]);
    return guess;
 }
 

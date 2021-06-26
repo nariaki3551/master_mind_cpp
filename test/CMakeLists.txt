@@ -24,12 +24,18 @@ target_compile_features(
   cxx_std_17
   )
 
+target_compile_definitions(
+  utest PRIVATE
+  ${OpenMp_CXX_DEFS}
+  )
+
 target_link_libraries(
   utest PRIVATE
   master_mind_lib
   gtest
   gtest_main
   pthread
+  ${OpenMPLib}
   )
 
 target_link_options(

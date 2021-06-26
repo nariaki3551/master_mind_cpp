@@ -1,5 +1,5 @@
 #include <iostream>
-#include <chrono>
+#include <omp.h>
 #include <argparse/argparse.hpp>
 
 #include "def.h"
@@ -66,18 +66,22 @@ void runTest(
    std::vector<int> countTable(S.size());
    std::vector<double> timeTable(S.size());
 
-   int i = 0;
-   for ( auto secret : S )
+#pragma omp parallel for
+   for ( int i = 0; i < static_cast<int>(S.size()); ++i )
    {
+#if OMP_VERBOSE
+      if ( i == 0 )
+         std::cout << "parallel test using " << omp_get_num_threads() << " threads " << std::endl;
+#endif
       // test code
+      auto secret = S[i];
       config.setSecret(*secret);
       CodePtrList testS = copy(S);
       CodeList guessHist;
       CodePtrList G;
 
       int count = 0;
-
-      auto start = std::chrono::system_clock::now(); // 計測開始時間
+      auto start = omp_get_wtime();
       decltype(policy(testS, testS, config)) guess;
       while( testS.size() > 1 )
       {
@@ -88,14 +92,12 @@ void runTest(
          trial(testS, guess, config);
          guessHist.push_back(guess);
       }
-      auto end = std::chrono::system_clock::now();  // 計測終了時間
+      auto end = omp_get_wtime();
 
       assert( *testS[0] == *secret );
-      double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
-            end-start).count();  //処理に要した時間をミリ秒に変換
+      double elapsed = end - start;
       countTable[i] = count;
       timeTable[i] = elapsed;
-      i++;
    }
 
    // output statistics
