@@ -65,8 +65,9 @@ void runTest(
 
    std::vector<int> countTable(S.size());
    std::vector<double> timeTable(S.size());
+   auto startTotal = omp_get_wtime();
 
-#pragma omp parallel for
+#pragma omp parallel for firstprivate(config)
    for ( int i = 0; i < static_cast<int>(S.size()); ++i )
    {
 #if OMP_VERBOSE
@@ -100,13 +101,14 @@ void runTest(
       timeTable[i] = elapsed;
    }
 
+   auto endTotal = omp_get_wtime();
    // output statistics
    auto getMax = [&](auto &v){ return *std::max_element(v.cbegin(), v.cend()); };
    auto getSum = [&](auto &v){ return std::accumulate(v.cbegin(), v.cend(), 0.0); };
    auto getAve = [&](auto &v){ return getSum(v) / v.size(); };
    int maxCount         = getMax(countTable);
    double averageCount  = getAve(countTable);
-   double totalTime     = getSum(timeTable);
+   double totalTime     = endTotal - startTotal;
    double averageTime   = getAve(timeTable);
    std::cout
       << "Log,num colors,num pins,policy,max count,average count,total time,average time"

@@ -80,7 +80,7 @@ Code distPolicy(
    std::vector<double> objs(G.size());
    std::map<Hint, int> d;  // distribution
    Hint hint;
-#pragma omp parallel for private(hint) firstprivate(d)
+#pragma omp parallel for private (hint, d) if (!omp_in_parallel())
    for ( int i = 0; i < static_cast<int>(G.size()); ++i )
    {
       auto code = G[i];

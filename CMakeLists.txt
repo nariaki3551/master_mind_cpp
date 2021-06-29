@@ -18,9 +18,9 @@ message("Binaries will be generaed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 #
 # find packages
 #
+find_package(OpenMP REQUIRED)
 option(USE_OPENMP "Use OpenMP" ON)
 if(USE_OPENMP)
-  find_package(OpenMP)
   set(OpenMPLib OpenMP::OpenMP_CXX)
   set(OpenMp_CXX_DEFS -DOMP_VERBOSE)
 else()

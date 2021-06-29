@@ -28,9 +28,8 @@ std::string strCode(
 }
 
 
-std::vector<int> x(1, 0);
-std::vector<int> y(1, 0);
-
+thread_local std::vector<int> x(0, 0);
+thread_local std::vector<int> y(0, 0);
 Hint countHitBlow(
       Code &code,
       Code &guess,
@@ -39,6 +38,7 @@ Hint countHitBlow(
 {
    if ( static_cast<int>(x.size()) < config.nColors )
    {
+      x.clear(); y.clear();
       x.resize(config.nColors);
       y.resize(config.nColors);
    }

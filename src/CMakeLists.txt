@@ -14,7 +14,10 @@ add_library(
 target_compile_options(
   master_mind_lib PRIVATE
   -Wall
-  $<$<BOOL:OPENMP_FOUND>:
+  $<$<CXX_COMPILER_ID:AppleClang>:
+    -Xclang -fopenmp
+  >
+  $<$<NOT:$<CXX_COMPILER_ID:AppleClang>>:
     ${OpenMP_CXX_FLAGS}
   >
   $<$<CONFIG:Debug>:
@@ -54,8 +57,7 @@ target_compile_options(
   mastermind PRIVATE
   -Wall
   $<$<CONFIG:Debug>:
-    -O0
-    -g -pg
+    -O0 -g -pg
   >
   $<$<CONFIG:Release>:
     -O3
