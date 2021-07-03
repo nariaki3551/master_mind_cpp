@@ -1,30 +1,54 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 project(MasterMind CXX)
 
-# setting of CMAKE_BUILD_TYPE
+#
+# setting
+#
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
 endif(NOT CMAKE_BUILD_TYPE)
 message("Generated with build types: ${CMAKE_BUILD_TYPE}")
 
-# setting of CMAKE_RUNTIME_OUTPUT_DIRECTORY
 if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY )
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 endif()
 message("Binaries will be generaed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
+
+#
+# find packages
+#
+find_package(OpenMP REQUIRED)
+option(USE_OPENMP "Use OpenMP" ON)
+if(USE_OPENMP)
+  set(OpenMPLib OpenMP::OpenMP_CXX)
+  set(OpenMp_CXX_DEFS -DOMP_VERBOSE)
+else()
+  set(OpenMPLib "")
+  set(OpenMp_CXX_DEFS "")
+endif()
+
+
+#
 # add mastermind and test
+#
 add_subdirectory(src)
 add_subdirectory(test)
 
+
+#
 # test
+#
 enable_testing()
 add_test(
   NAME utest
   COMMAND utest
   )
 
+
+#
 # coverage test
+#
 add_custom_target(
   coverage
   DEPENDS utest

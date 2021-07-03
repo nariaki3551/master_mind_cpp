@@ -35,8 +35,8 @@ std::string strCode(
       ) noexcept;
 
 
-extern std::vector<int> x;
-extern std::vector<int> y;
+extern thread_local std::vector<int> x;
+extern thread_local std::vector<int> y;
 /**
 * @fn Hint countHitBlow(Code &code, Code &guess)
 * @brief コード2つから, hit, blowを計算する

@@ -14,6 +14,12 @@ add_library(
 target_compile_options(
   master_mind_lib PRIVATE
   -Wall
+  $<$<CXX_COMPILER_ID:AppleClang>:
+    -Xclang -fopenmp
+  >
+  $<$<NOT:$<CXX_COMPILER_ID:AppleClang>>:
+    ${OpenMP_CXX_FLAGS}
+  >
   $<$<CONFIG:Debug>:
     -O0
     -g -pg
@@ -26,6 +32,11 @@ target_compile_options(
 target_compile_features(
   master_mind_lib PRIVATE
   cxx_std_17
+  )
+
+target_compile_definitions(
+  master_mind_lib PRIVATE
+  ${OpenMp_CXX_DEFS}
   )
 
 
@@ -46,8 +57,7 @@ target_compile_options(
   mastermind PRIVATE
   -Wall
   $<$<CONFIG:Debug>:
-    -O0
-    -g -pg
+    -O0 -g -pg
   >
   $<$<CONFIG:Release>:
     -O3
@@ -59,8 +69,14 @@ target_compile_features(
   cxx_std_17
   )
 
+target_compile_definitions(
+  mastermind PRIVATE
+  ${OpenMp_CXX_DEFS}
+  )
+
 target_link_libraries(
   mastermind PRIVATE
   master_mind_lib
+  ${OpenMPLib}
   )
 
