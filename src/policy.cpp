@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <omp.h>
 #include "policy.h"
+#include <progresscpp/ProgressBar.hpp>
 
 
 namespace MasterMind
@@ -80,9 +81,20 @@ Code distPolicy(
    std::vector<double> objs(G.size());
    std::map<Hint, int> d;  // distribution
    Hint hint;
+
+   // initialize the bar
+   progresscpp::ProgressBar progressBar(G.size(), 70);
+
 #pragma omp parallel for private (hint, d) if (!omp_in_parallel())
    for ( int i = 0; i < static_cast<int>(G.size()); ++i )
    {
+#pragma omp critical
+      if ( config.interactive )
+      {
+         // record the tick and display the bar
+         ++progressBar;
+         progressBar.display();
+      }
       auto code = G[i];
       d.clear();
       for ( auto _code : S )

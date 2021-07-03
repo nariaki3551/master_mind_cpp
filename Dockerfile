@@ -16,6 +16,7 @@ COPY . .
 RUN mkdir source -p && rm -rf source/*
 # argparse
 RUN cd source && git clone https://github.com/p-ranav/argparse.git
+RUN cd source && git clone https://github.com/prakhar1989/progress-cpp.git
 
 # build
 RUN rm -rf build && mkdir build
