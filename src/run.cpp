@@ -1,5 +1,4 @@
 #include <omp.h>
-#include "mpi.h"
 #include <argparse/argparse.hpp>
 
 #include "run.h"
