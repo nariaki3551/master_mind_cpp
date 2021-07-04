@@ -9,6 +9,12 @@ add_library(
   policy.cpp
   trial.cpp
   codeGenerator.cpp
+  run.cpp
+  )
+
+target_include_directories(
+  master_mind_lib PRIVATE
+  ${PROJECT_SOURCE_DIR}/source/argparse/include
   )
 
 target_compile_options(
@@ -46,11 +52,6 @@ target_compile_definitions(
 add_executable(
   mastermind
   main.cpp
-  )
-
-target_include_directories(
-  mastermind PRIVATE
-  ${PROJECT_SOURCE_DIR}/source/argparse/include
   )
 
 target_compile_options(
