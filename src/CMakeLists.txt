@@ -10,6 +10,7 @@ add_library(
   trial.cpp
   codeGenerator.cpp
   run.cpp
+  $<$<BOOL:${USE_MPI}>:runMpi.cpp>
   )
 
 target_include_directories(
@@ -73,6 +74,7 @@ target_compile_features(
 target_compile_definitions(
   mastermind PRIVATE
   ${OpenMp_CXX_DEFS}
+  $<$<BOOL:${USE_MPI}>: -DUSE_MPI>
   )
 
 target_link_libraries(
