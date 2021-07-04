@@ -24,10 +24,11 @@ jobs:
     - name: Install gtest
       run: sudo apt-get install libgtest-dev
 
-    - name: Install argparse manually
+    - name: Install argparse, progress-cpp manually
       run: |
         mkdir -p ${{github.workspace}}/source && rm -rf ${{github.workspace}}/source/*
         cd ${{github.workspace}}/source && git clone https://github.com/p-ranav/argparse.git
+        cd ${{github.workspace}}/source && git clone https://github.com/prakhar1989/progress-cpp.git
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
