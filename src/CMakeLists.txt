@@ -36,6 +36,13 @@ target_compile_options(
   >
   )
 
+target_include_directories(
+  master_mind_lib PRIVATE
+  ${PROJECT_SOURCE_DIR}/source/argparse/include
+  ${PROJECT_SOURCE_DIR}/source/progress-cpp/include
+  )
+
+
 target_compile_features(
   master_mind_lib PRIVATE
   cxx_std_17

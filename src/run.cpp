@@ -1,5 +1,6 @@
 #include <omp.h>
 #include <argparse/argparse.hpp>
+#include <progresscpp/ProgressBar.hpp>
 
 #include "run.h"
 
@@ -51,6 +52,10 @@ void runTest(
    std::vector<double> timeTable(S.size());
    auto startTotal = omp_get_wtime();
 
+   // initialize the bar
+   progresscpp::ProgressBar progressBar(S.size(), 70);
+
+
 #pragma omp parallel for firstprivate(config)
    for ( int i = 0; i < static_cast<int>(S.size()); ++i )
    {
@@ -58,6 +63,14 @@ void runTest(
       if ( i == 0 )
          std::cout << "parallel test using " << omp_get_num_threads() << " threads " << std::endl;
 #endif
+
+#pragma omp critical
+      {
+         // record the tick and display the bar
+         ++progressBar;
+         progressBar.display();
+      }
+
       // test code
       auto secret = S[i];
       config.setSecret(*secret);
