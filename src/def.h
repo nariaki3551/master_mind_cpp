@@ -20,6 +20,8 @@ using CodePtr     = std::shared_ptr<Code>;
 using Hint        = std::pair<HintType, HintType>;
 using CodeList    = std::deque<Code>;
 using CodePtrList = std::deque<CodePtr>;
+using CodePtrPair = std::pair<CodePtr, CodePtr>;
+using CodePair    = std::pair<Code, Code>;
 
 };  // MasterMind
 

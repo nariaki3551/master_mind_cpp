@@ -28,6 +28,7 @@ std::string strCode(
 }
 
 
+thread_local std::map<CodePair, Hint> lruCacheOfCountHitBlow;
 thread_local std::vector<int> x(0, 0);
 thread_local std::vector<int> y(0, 0);
 Hint countHitBlow(
@@ -36,6 +37,15 @@ Hint countHitBlow(
       Config &config
       ) noexcept
 {
+   CodePair codePair;
+   if ( code < guess )
+      codePair = std::make_pair(code, guess);
+   else
+      codePair = std::make_pair(guess, code);
+   auto itr = lruCacheOfCountHitBlow.find(codePair);
+   if ( itr != lruCacheOfCountHitBlow.end() )
+      return lruCacheOfCountHitBlow.at(codePair);
+
    if ( static_cast<int>(x.size()) < config.nColors )
    {
       x.clear(); y.clear();
@@ -61,7 +71,10 @@ Hint countHitBlow(
    {
       blow += std::min(x[i], y[i]);
    }
-   return Hint(hit, blow);
+
+   Hint hint{hit, blow};
+   lruCacheOfCountHitBlow.emplace(codePair, hint);
+   return hint;
 }
 
 

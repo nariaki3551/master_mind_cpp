@@ -4,6 +4,7 @@
 #include <sstream>
 #include <memory>
 #include <vector>
+#include <map>
 
 #include "def.h"
 #include "config.h"
@@ -35,6 +36,7 @@ std::string strCode(
       ) noexcept;
 
 
+extern thread_local std::map<CodePair, Hint> lruCacheOfCountHitBlow;
 extern thread_local std::vector<int> x;
 extern thread_local std::vector<int> y;
 /**
