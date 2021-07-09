@@ -12,16 +12,23 @@ int main(
       char *argv[]
       )
 {
+   namespace mm = MasterMind;
+   mm::Config config = mm::getConfig(argc, argv);
+
 #ifdef USE_MPI
    int size, rank;
    MPI_Init( &argc, &argv );
    MPI_Comm_size( MPI_COMM_WORLD, &size );
    MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+   if ( rank == 0 )
+   {
+      std::cout << config.str() << std::endl;
+      std::cout << "MPI size = " << size << std::endl;
+   }
+#else
+   std::cout << config.str() << std::endl;
 #endif
 
-   namespace mm = MasterMind;
-   mm::Config config = mm::getConfig(argc, argv);
-   std::cout << config.str() << std::endl;
 
    if ( config.interactive )
    {
