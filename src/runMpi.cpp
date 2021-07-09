@@ -1,5 +1,6 @@
 #include <omp.h>
-#include "mpi.h"
+#include <mpi.h>
+#include <progresscpp/ProgressBar.hpp>
 #include "runMpi.h"
 
 
@@ -20,8 +21,17 @@ void runTestPara(
    auto startTotal = omp_get_wtime();
    int sendcount = 0;
 
+   // initialize the bar
+   progresscpp::ProgressBar progressBar(S.size(), 70);
+
    for ( int i = 0; i*nProcesses + rank < static_cast<int>(S.size()); ++i )
    {
+      if ( rank == 0 )
+      {
+         // record the tick and display the bar
+         for ( int j = 0; j < nProcesses; j++ ) ++progressBar;
+         progressBar.display();
+      }
       // test code
       auto secret = S[i*nProcesses + rank];
       sendcount++;
