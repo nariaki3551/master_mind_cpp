@@ -29,7 +29,7 @@ double minmax(
       ) noexcept
 {
    double maxElm = -1;
-   for ( auto pair : d )
+   for ( auto &pair : d )
    {
       if ( pair.second > maxElm ) maxElm = pair.second;
    }
@@ -43,7 +43,7 @@ double expMinmax(
       ) noexcept
 {
    double exp = 0;
-   for ( auto pair : d )
+   for ( auto &pair : d )
    {
       exp += pair.second * pair.second;
    }
@@ -56,9 +56,9 @@ double entropy(
       int N
       ) noexcept
 {
-   double minus_entropy = 0;
-   double p;
-   for ( auto pair : d )
+   double minus_entropy = 0.0;
+   double p = 0.0;
+   for ( auto &pair : d )
    {
       if ( pair.second > 0 )
       {
@@ -97,7 +97,7 @@ Code distPolicy(
       }
       auto code = G[i];
       d.clear();
-      for ( auto _code : S )
+      for ( auto &_code : S )
       {
          hint = countHitBlow(*code, *_code, config);
          if ( d.find(hint) == d.end() )

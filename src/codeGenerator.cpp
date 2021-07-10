@@ -35,9 +35,9 @@ void setGuessCandidates(
 
    // get colors used in guesses
    std::set<ColorType> histColors;
-   for ( auto guess : guessHist )
+   for ( auto &guess : guessHist )
    {
-      for ( auto color : guess )
+      for ( auto &color : guess )
       {
          histColors.insert(color);
       }
@@ -52,7 +52,7 @@ void setGuessCandidates(
    Itertools itertools;
    auto colors = itertools.range<ColorType>(0, config.nColors);
    ColorType minColorNotInHist = -1;
-   for ( auto color : colors )
+   for ( auto &color : colors )
    {
       if ( histColors.find(color) == histColors.end() )
       {
@@ -63,11 +63,11 @@ void setGuessCandidates(
    assert( minColorNotInHist != -1 );
 
    // extract guess code
-   for ( auto code : codePtrList )
+   for ( auto &code : codePtrList )
    {
       int tmp = -1;
       bool insert = true;
-      for ( auto color : *code )
+      for ( auto &color : *code )
       {
          if ( histColors.find(color) == histColors.end() )
          {
