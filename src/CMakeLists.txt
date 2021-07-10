@@ -9,6 +9,13 @@ add_library(
   policy.cpp
   trial.cpp
   codeGenerator.cpp
+  run.cpp
+  $<$<BOOL:${USE_MPI}>:runMpi.cpp>
+  )
+
+target_include_directories(
+  master_mind_lib PRIVATE
+  ${PROJECT_SOURCE_DIR}/source/argparse/include
   )
 
 target_compile_options(
@@ -31,6 +38,7 @@ target_compile_options(
 
 target_include_directories(
   master_mind_lib PRIVATE
+  ${PROJECT_SOURCE_DIR}/source/argparse/include
   ${PROJECT_SOURCE_DIR}/source/progress-cpp/include
   )
 
@@ -54,12 +62,6 @@ add_executable(
   main.cpp
   )
 
-target_include_directories(
-  mastermind PRIVATE
-  ${PROJECT_SOURCE_DIR}/source/argparse/include
-  ${PROJECT_SOURCE_DIR}/source/progress-cpp/include
-  )
-
 target_compile_options(
   mastermind PRIVATE
   -Wall
@@ -79,6 +81,7 @@ target_compile_features(
 target_compile_definitions(
   mastermind PRIVATE
   ${OpenMp_CXX_DEFS}
+  $<$<BOOL:${USE_MPI}>: -DUSE_MPI>
   )
 
 target_link_libraries(

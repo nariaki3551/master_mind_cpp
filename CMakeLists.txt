@@ -14,6 +14,7 @@ if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY )
 endif()
 message("Binaries will be generaed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
+option(USE_MPI "Use MPI" OFF)
 
 #
 # find packages
@@ -27,6 +28,12 @@ else()
   set(OpenMPLib "")
   set(OpenMp_CXX_DEFS "")
 endif()
+if(USE_MPI)
+  find_package(MPI REQUIRED)
+  set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})  # Maybe there's a better way...
+  message("Set CMAKE_CXX_COMPILER <-- ${CMAKE_CXX_COMPILER}")
+endif()
+
 
 
 #
