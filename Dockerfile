@@ -7,7 +7,8 @@ WORKDIR ${HOME}
 RUN apt update -y && apt-get update -y
 RUN apt-get install -y tzdata
 RUN apt-get install -y build-essential cmake vim git valgrind screen \
-                       libpthread-stubs0-dev libgtest-dev libomp-dev
+                       libpthread-stubs0-dev libgtest-dev libomp-dev \
+                       libopenmpi-dev
 
 # copy local files into image
 COPY . .
