@@ -47,13 +47,7 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
 
     - name: Build OpenMPI
-      run: |
-        wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz
-        tar -xvf ./openmpi-4.0.2.tar.gz
-        cd openmpi-4.0.2
-        ./configure --disable-mpi-fortran
-        make
-        sudo make install
+      run: sudo apt install -y openmpi-bin libopenmpi-dev
 
     - name: Configure CMake with MPI
       run: |
