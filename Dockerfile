@@ -20,5 +20,7 @@ RUN cd source && git clone https://github.com/p-ranav/argparse.git
 RUN cd source && git clone https://github.com/prakhar1989/progress-cpp.git
 
 # build
+ARG USE_MPI=OFF
+ARG j=1
 RUN rm -rf build && mkdir build
-RUN cd build && cmake .. && make
+RUN cd build && cmake .. -DUSE_MPI=${USE_MPI} && make -j ${j}
