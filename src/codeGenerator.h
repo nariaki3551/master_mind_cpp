@@ -35,7 +35,7 @@ void allCodeGenerator(
  */
 void setGuessCandidates(
       CodePtrList &codePtrList,
-      CodeList &guessHist,
+      CodePtrList &guessHist,
       Config &config,
       CodePtrList &guessCandidates
       ) noexcept;

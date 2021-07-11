@@ -35,7 +35,8 @@ void Itertools::product(
    assert( codePtrList.size() == 0 );
    for ( auto &i : pool )
    {
-      codePtrList.push_back(std::make_shared<Code>(Code{i}));
+      // codePtrList.push_back(std::make_shared<Code>(Code{i}));
+      codePtrList.push_back(createPtr(Code{i}));
    }
    int n = 1;
    for ( int i = 0; i < (r-1); ++i )
@@ -47,7 +48,8 @@ void Itertools::product(
          codePtrList.pop_front();
          for ( auto &k : pool )
          {
-            CodePtr newCode = std::make_shared<Code>(Code(*code));
+            // CodePtr newCode = std::make_shared<Code>(Code(*code));
+            CodePtr newCode = createPtr(Code(*code));
             newCode->push_back(k);
             codePtrList.push_back(newCode);
          }
@@ -76,7 +78,8 @@ void Itertools::permutations(
    auto indices = range(0, n);
    auto cycles = range(n, n-r, -1);
    for ( int k = 0; k < r; ++k ) code[k] = pool[indices[k]];
-   codePtrList.push_back(std::make_shared<Code>(Code(code)));
+   // codePtrList.push_back(std::make_shared<Code>(Code(code)));
+   codePtrList.push_back(createPtr(code));
 
    bool finish = false;
    while ( !finish )
@@ -103,7 +106,8 @@ void Itertools::permutations(
             indices[i] = indices[n-j];
             indices[n-j] = tmp;
             for ( int k = 0; k < r; ++k ) code[k] = pool[indices[k]];
-            codePtrList.push_back(std::make_shared<Code>(Code(code)));
+            // codePtrList.push_back(std::make_shared<Code>(Code(code)));
+            codePtrList.push_back(createPtr(code));
             finish = false;
             break;
          }

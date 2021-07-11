@@ -19,7 +19,7 @@ class Config
       bool duplicate;         // if it is true, then color-duplication is allowed
       bool interactive;       // if it is true, then test by user input
       std::string policy;     // policy
-      Code secret;            // for test
+      CodePtr secret;         // for test
 
       /**
       * @brief Constructor
@@ -48,7 +48,7 @@ class Config
        * @param[in] code コード
        */
       void setSecret(
-            Code code
+            CodePtr code
             )
       {
          secret = code;

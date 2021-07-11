@@ -17,9 +17,8 @@ void runInteractive(
 
    // main
    int count = 0;
-   decltype(policy(S, S, config)) guess;
    CodePtrList G;
-   CodeList guessHist;
+   CodePtrList guessHist;
    while( S.size() > 1 )
    {
       count++;
@@ -30,7 +29,7 @@ void runInteractive(
          << std::endl;
       G.clear();
       setGuessCandidates(S, guessHist, config, G);
-      guess = policy(S, G, config);
+      auto guess = policy(S, G, config);
       trial(S, guess, config);
       guessHist.push_back(guess);
    }
@@ -73,20 +72,19 @@ void runTest(
 
       // test code
       auto secret = S[i];
-      config.setSecret(*secret);
+      config.setSecret(secret);
       CodePtrList testS = copy(S);
-      CodeList guessHist;
+      CodePtrList guessHist;
       CodePtrList G;
 
       int count = 0;
       auto start = omp_get_wtime();
-      decltype(policy(testS, testS, config)) guess;
       while( testS.size() > 1 )
       {
          count++;
          G.clear();
          setGuessCandidates(S, guessHist, config, G);
-         guess = policy(testS, G, config);
+         auto guess = policy(testS, G, config);
          trial(testS, guess, config);
          guessHist.push_back(guess);
       }

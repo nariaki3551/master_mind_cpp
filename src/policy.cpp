@@ -11,15 +11,14 @@ namespace MasterMind
 std::mt19937 engine = std::mt19937(0);
 
 
-Code randomPolicy(
+CodePtr randomPolicy(
       CodePtrList &S,
       CodePtrList &G
       ) noexcept
 {
    // random sampling from G
    std::uniform_int_distribution<> sampler(0, G.size()-1);
-   Code guess = Code(*G[sampler(engine)]);
-   return guess;
+   return G[sampler(engine)];
 }
 
 
@@ -71,7 +70,7 @@ double entropy(
 
 
 template<class ObjFunc>
-Code distPolicy(
+CodePtr distPolicy(
       CodePtrList &S,
       CodePtrList &G,
       ObjFunc objFunc,
@@ -99,7 +98,7 @@ Code distPolicy(
       d.clear();
       for ( auto &_code : S )
       {
-         hint = countHitBlow(*code, *_code, config);
+         hint = countHitBlow(code, _code, config);
          if ( d.find(hint) == d.end() )
          {
             d.emplace(hint, 0);
@@ -111,12 +110,11 @@ Code distPolicy(
 
    auto iter = std::min_element(objs.begin(), objs.end());
    int index = std::distance(objs.begin(), iter);
-   Code guess(*G[index]);
-   return guess;
+   return G[index];
 }
 
 
-Code policy(
+CodePtr policy(
       CodePtrList &S,
       CodePtrList &G,
       Config &config

@@ -35,7 +35,7 @@ void runTestPara(
       // test code
       auto secret = S[i*nProcesses + rank];
       sendcount++;
-      config.setSecret(*secret);
+      config.setSecret(secret);
       CodePtrList testS = copy(S);
       CodeList guessHist;
       CodePtrList G;

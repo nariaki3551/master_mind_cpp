@@ -28,16 +28,17 @@ std::string strCode(
 }
 
 
-thread_local std::map<CodePair, Hint> lruCacheOfCountHitBlow;
+thread_local LruCacheOfCountHitBlow lruCacheOfCountHitBlow;
 thread_local std::vector<int> x(0, 0);
 thread_local std::vector<int> y(0, 0);
 Hint countHitBlow(
-      Code &code,
-      Code &guess,
+      CodePtr code,
+      CodePtr guess,
       Config &config
       ) noexcept
 {
-   CodePair codePair;
+#if USE_LRU_CACHE
+   CodePtrPair codePair;
    if ( code < guess )
       codePair = std::make_pair(code, guess);
    else
@@ -45,6 +46,7 @@ Hint countHitBlow(
    auto itr = lruCacheOfCountHitBlow.find(codePair);
    if ( itr != lruCacheOfCountHitBlow.end() )
       return lruCacheOfCountHitBlow.at(codePair);
+#endif
 
    if ( static_cast<int>(x.size()) < config.nColors )
    {
@@ -57,14 +59,14 @@ Hint countHitBlow(
    int hit = 0, blow = 0;
    for( int i = 0; i < config.nPins; ++i )
    {
-      if( code[i] == guess[i] )
+      if( code->at(i) == guess->at(i) )
       {
          hit++;
       }
       else
       {
-         x[code[i]]++;
-         y[guess[i]]++;
+         x[code->at(i)]++;
+         y[guess->at(i)]++;
       }
    }
    for( int i = 0; i < config.nColors; ++i )
@@ -73,7 +75,9 @@ Hint countHitBlow(
    }
 
    Hint hint{hit, blow};
+#if USE_LRU_CACHE
    lruCacheOfCountHitBlow.emplace(codePair, hint);
+#endif
    return hint;
 }
 
@@ -85,7 +89,7 @@ CodePtrList copy(
    CodePtrList _codePtrList;
    for ( auto &code : codePtrList )
    {
-      _codePtrList.push_back(std::make_shared<Code>(Code(*code)));
+      _codePtrList.push_back(createPtr(Code(*code)));
    }
    return _codePtrList;
 }

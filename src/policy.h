@@ -22,13 +22,13 @@ extern std::mt19937 engine;
 
 
 /**
-* @fn Code randomPolicy(CodePtrList S, CodePtrList G)
+* @fn CodePtr randomPolicy(CodePtrList S, CodePtrList G)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in] S 秘密コードの候補集合
 * @param[in] G 推論コードの候補集合
 * @return 推論コード
 */
-Code randomPolicy(
+CodePtr randomPolicy(
       CodePtrList &S,
       CodePtrList &G
       ) noexcept;
@@ -74,7 +74,7 @@ double entropy(
 
 
 /**
-* @fn Code minmaxPolicy(CodePtrList &S, CodePtrList &G, Config &config)
+* @fn CodePtr minmaxPolicy(CodePtrList &S, CodePtrList &G, Config &config)
 * @brief 推論コード候補集合Gから, objFuncの値が最小のものを選択する
 * @param[in] S 秘密コードの候補集合
 * @param[in] G 推論コードの候補集合
@@ -83,7 +83,7 @@ double entropy(
 * @return 推論コード
 */
 template<class ObjFunc>
-Code distPolicy(
+CodePtr distPolicy(
       CodePtrList &S,
       CodePtrList &G,
       ObjFunc objFunc,
@@ -92,14 +92,14 @@ Code distPolicy(
 
 
 /**
-* @fn Code policy(CodePtrList S, CodePtrList G, Config &config)
+* @fn CodePtr policy(CodePtrList S, CodePtrList G, Config &config)
 * @brief 推論コード候補集合Gから1つを選択する
 * @param[in] S 秘密コードの候補集合
 * @param[in] G 推論コードの候補集合
 * @param[in] config パラメタ
 * @return 推論コード
 */
-Code policy(
+CodePtr policy(
       CodePtrList &S,
       CodePtrList &G,
       Config &config

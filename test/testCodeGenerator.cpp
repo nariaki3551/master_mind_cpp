@@ -74,7 +74,7 @@ TEST ( codeGeneratorTest, getGuessCandidatesTest1 )
    mm::CodePtrList S;
    mm::allCodeGenerator(config, S);
 
-   mm::CodeList guessHist;
+   mm::CodePtrList guessHist;
    mm::CodePtrList G;
    setGuessCandidates(S, guessHist, config, G);
    // [0, 0], [0, 1]
@@ -92,7 +92,9 @@ TEST ( codeGeneratorTest, getGuessCandidatesTest2 )
    mm::CodePtrList S;
    mm::allCodeGenerator(config, S);
 
-   mm::CodeList guessHist{ mm::Code{0, 0} };
+   mm::CodePtrList guessHist{
+      mm::createPtr(mm::Code{0, 0})
+   };
    mm::CodePtrList G;
    setGuessCandidates(S, guessHist, config, G);
    // [0, 0], [0, 1], [1, 0], [1, 1]
@@ -112,7 +114,9 @@ TEST ( codeGeneratorTest, getGuessCandidatesTest3 )
    mm::CodePtrList S;
    mm::allCodeGenerator(config, S);
 
-   mm::CodeList guessHist{ mm::Code{0, 0} };
+   mm::CodePtrList guessHist{
+      mm::createPtr(mm::Code{0, 0})
+   };
    mm::CodePtrList G;
    setGuessCandidates(S, guessHist, config, G);
    // [0, 0], [0, 1], [1, 0], [1, 1], [1, 2]

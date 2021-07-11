@@ -36,11 +36,11 @@ std::string strCode(
       ) noexcept;
 
 
-extern thread_local std::map<CodePair, Hint> lruCacheOfCountHitBlow;
+extern thread_local LruCacheOfCountHitBlow lruCacheOfCountHitBlow;
 extern thread_local std::vector<int> x;
 extern thread_local std::vector<int> y;
 /**
-* @fn Hint countHitBlow(Code &code, Code &guess)
+* @fn Hint countHitBlow(CodePtr code, CodePtr guess)
 * @brief コード2つから, hit, blowを計算する
 * @param[in] code コード
 * @param[in] guess コード
@@ -48,14 +48,14 @@ extern thread_local std::vector<int> y;
 * @return (hit, blow)
 */
 Hint countHitBlow(
-      Code &code,
-      Code &guess,
+      CodePtr code,
+      CodePtr guess,
       Config &config
       ) noexcept;
 
 
 /**
-* @fn CodePtrList code(CodePtrList &codePtrList)
+* @fn CodePtrList copy(CodePtrList &codePtrList)
 * @brief copi CodePtrList
 * @param[in] codePtrList
 * @return copied codePtrList

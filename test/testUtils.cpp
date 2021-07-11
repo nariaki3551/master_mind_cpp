@@ -18,24 +18,30 @@ namespace mm = MasterMind;
  */
 TEST ( countHitBlowTest, countHitBlowTest1 )
 {
-   mm::Code codeA{ 0, 0 };
-   mm::Code codeB{ 0, 0 };
+   auto codeA = mm::createPtr(mm::Code{ 0, 0 });
+   auto codeB = mm::createPtr(mm::Code{ 0, 0 });
    mm::Config config{2, 2, true};
    ASSERT_EQ( countHitBlow(codeA, codeB, config), mm::Hint(2, 0) );
+
+   for ( auto &item : mm::lruCacheOfCountHitBlow )
+   {
+      std::cout << "CodePtrPair " << mm::strCode(item.first.first) << ", " << mm::strCode(item.first.second) << std::endl;
+      std::cout << "  Hint" << item.second.first << ", " << item.second.second << std::endl;
+   }
 }
 
 TEST ( countHitBlowTest, countHitBlowTest2 )
 {
-   mm::Code codeA{ 0, 0 };
-   mm::Code codeB{ 0, 1 };
+   auto codeA = mm::createPtr(mm::Code{ 0, 0 });
+   auto codeB = mm::createPtr(mm::Code{ 0, 1 });
    mm::Config config{2, 2, true};
    ASSERT_EQ( countHitBlow(codeA, codeB, config), mm::Hint(1, 0) );
 }
 
 TEST ( countHitBlowTest, countHitBlowTest3 )
 {
-   mm::Code codeA{ 0, 0 };
-   mm::Code codeB{ 1, 1 };
+   auto codeA = mm::createPtr(mm::Code{ 0, 0 });
+   auto codeB = mm::createPtr(mm::Code{ 1, 1 });
    mm::Config config{2, 2, true};
    ASSERT_EQ( countHitBlow(codeA, codeB, config), mm::Hint(0, 0) );
 }
@@ -50,7 +56,7 @@ TEST ( strCodeTest, strCodeTest1 )
 }
 TEST ( strCodeTest, strCodeTest2 )
 {
-   mm::CodePtr codeA(new mm::Code{0, 0});
+   auto codeA = mm::createPtr(mm::Code{0, 0});
    mm::strCode(codeA);
 }
 
@@ -59,9 +65,9 @@ TEST ( strCodeTest, strCodeTest2 )
  */
 TEST ( copyTest, copyTest1 )
 {
-   mm::CodePtr codeA(new mm::Code{0});
-   mm::CodePtr codeB(new mm::Code{1});
-   mm::CodePtr codeC(new mm::Code{2});
+   auto codeA = mm::createPtr(mm::Code{0});
+   auto codeB = mm::createPtr(mm::Code{1});
+   auto codeC = mm::createPtr(mm::Code{2});
    mm::CodePtrList codePtrList{
       codeA, codeB, codeC
    };

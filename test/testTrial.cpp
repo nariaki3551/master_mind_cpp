@@ -23,9 +23,9 @@ TEST ( trialTest, test )
    int nColors = 2, nPins = 2;
    bool duplicate = true, interactive = false;
    mm::Config config(nColors, nPins, duplicate, interactive);
-   config.setSecret(mm::Code{0, 1});
+   config.setSecret(mm::createPtr(mm::Code{0, 1}));
 
-   mm::Code guess = mm::Code{1, 1};
+   auto guess = mm::createPtr(mm::Code{1, 1});
    mm::trial(S, guess, config);  // (hit, blow) = (1, 0)
    mm::CodePtrList reduceS{ codeB, codeC };
    ASSERT_EQ( S, reduceS );

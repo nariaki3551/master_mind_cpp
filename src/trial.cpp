@@ -7,7 +7,7 @@ namespace MasterMind
 
 void trial(
       CodePtrList &S,
-      Code &guess,
+      CodePtr guess,
       Config &config
       ) noexcept
 {
@@ -29,14 +29,16 @@ void trial(
    else
    {
       // config.secretから正解
-      InputHint = countHitBlow(config.secret, guess, config);
+      InputHint = countHitBlow(
+            config.secret, guess, config
+            );
    }
 
    // 選別
    CodePtrList newS;
    for ( auto &code : S )
    {
-      if( countHitBlow(*code, guess, config) == InputHint )
+      if( countHitBlow(code, guess, config) == InputHint )
       {
          newS.push_back(code);
       }

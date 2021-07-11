@@ -26,7 +26,7 @@ void allCodeGenerator(
 
 void setGuessCandidates(
       CodePtrList &codePtrList,
-      CodeList &guessHist,
+      CodePtrList &guessHist,
       Config &config,
       CodePtrList &guessCandidates
       ) noexcept
@@ -37,7 +37,7 @@ void setGuessCandidates(
    std::set<ColorType> histColors;
    for ( auto &guess : guessHist )
    {
-      for ( auto &color : guess )
+      for ( auto &color : *guess )
       {
          histColors.insert(color);
       }

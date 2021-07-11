@@ -20,7 +20,7 @@ namespace MasterMind
 */
 void trial(
       CodePtrList &S,
-      Code &guess,
+      CodePtr guess,
       Config &config
       ) noexcept;
 
