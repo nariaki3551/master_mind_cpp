@@ -33,7 +33,7 @@ void Itertools::product(
       ) noexcept
 {
    assert( codePtrList.size() == 0 );
-   for ( auto i : pool )
+   for ( auto &i : pool )
    {
       codePtrList.push_back(std::make_shared<Code>(Code{i}));
    }
@@ -45,7 +45,7 @@ void Itertools::product(
       {
          CodePtr code = codePtrList.front();
          codePtrList.pop_front();
-         for ( auto k : pool )
+         for ( auto &k : pool )
          {
             CodePtr newCode = std::make_shared<Code>(Code(*code));
             newCode->push_back(k);

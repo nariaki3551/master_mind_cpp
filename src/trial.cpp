@@ -34,7 +34,7 @@ void trial(
 
    // 選別
    CodePtrList newS;
-   for ( auto code : S )
+   for ( auto &code : S )
    {
       if( countHitBlow(*code, guess, config) == InputHint )
       {

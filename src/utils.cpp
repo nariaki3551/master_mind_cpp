@@ -11,7 +11,7 @@ std::string strCode(
 {
    std::ostringstream os;
    os << "[";
-   for ( int pin : code )
+   for ( auto &pin : code )
    {
       os << " " << pin;
    }
@@ -83,7 +83,7 @@ CodePtrList copy(
       ) noexcept
 {
    CodePtrList _codePtrList;
-   for ( auto code : codePtrList )
+   for ( auto &code : codePtrList )
    {
       _codePtrList.push_back(std::make_shared<Code>(Code(*code)));
    }
