@@ -5,7 +5,9 @@ A solver of master_mind coded by c++.
 
 ## Install
 
+```sh
 git clone https://github.com/nariaki3551/master_mind_cpp.git
+```
 
 <br>
 
